@@ -145,6 +145,19 @@ export default function HomeScreen() {
               <Text style={styles.actionDescSecondary}>查看进度</Text>
             </View>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => router.push('/exams')}
+          >
+            <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(255,152,0,0.15)' }]}>
+                <Text style={styles.actionEmoji}>🏆</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>剑桥考试</Text>
+              <Text style={styles.actionDescSecondary}>报名通道</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
         {/* Latest Report Summary */}

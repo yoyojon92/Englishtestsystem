@@ -8,6 +8,7 @@ import assessmentRoutes from './routes/assessment.js';
 import courseRoutes from './routes/course.js';
 import progressRoutes from './routes/progress.js';
 import reportRoutes from './routes/report.js';
+import examRoutes from './routes/exam.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api/v1/assessments', assessmentRoutes);
 app.use('/api/v1/courses', courseRoutes);
 app.use('/api/v1/progress', progressRoutes);
 app.use('/api/v1/reports', reportRoutes);
+app.use('/api/v1/exams', examRoutes);
 
 // Health check
 app.get('/api/v1/health', (req, res) => {

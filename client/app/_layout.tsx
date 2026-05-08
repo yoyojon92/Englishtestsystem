@@ -30,6 +30,17 @@ export default function RootLayout() {
         <Stack.Screen name="courses-detail" options={{ title: "课程详情" }} />
         <Stack.Screen name="reports-index" options={{ title: "报告列表" }} />
         <Stack.Screen name="reports-detail" options={{ title: "报告详情" }} />
+        <Stack.Screen name="exams" options={{ title: "考试中心" }} />
+        <Stack.Screen name="exams/detail" options={{ title: "考试详情" }} />
+        <Stack.Screen name="exams/sessions" options={{ title: "考试场次" }} />
+        <Stack.Screen name="exams/sessions/list" options={{ title: "选择场次" }} />
+        <Stack.Screen name="exams/mock" options={{ title: "模拟考试" }} />
+        <Stack.Screen name="exams/speaking" options={{ title: "口语考试" }} />
+        <Stack.Screen name="exams/registration" options={{ title: "我的报名" }} />
+        <Stack.Screen name="exams/registration/success" options={{ title: "报名成功" }} />
+        <Stack.Screen name="exams/plans" options={{ title: "备考计划" }} />
+        <Stack.Screen name="exams/orders" options={{ title: "我的订单" }} />
+        <Stack.Screen name="exams/orders/order" options={{ title: "购买冲刺包" }} />
       </Stack>
       <Toast />
     </Provider>
