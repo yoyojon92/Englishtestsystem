@@ -72,6 +72,18 @@ const routes = [
         component: () => import('@/views/settings/index.vue'),
         meta: { title: '系统设置', icon: 'Setting' },
       },
+      // 教师端路由
+      {
+        path: 'teacher',
+        name: 'Teacher',
+        redirect: '/teacher/dashboard',
+      },
+      {
+        path: 'teacher/dashboard',
+        name: 'TeacherDashboard',
+        component: () => import('@/views/teacher/Dashboard.vue'),
+        meta: { title: '教师工作台', icon: 'Briefcase' },
+      },
     ],
   },
 ]
