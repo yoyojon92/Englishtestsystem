@@ -41,6 +41,13 @@ export default function RootLayout() {
         <Stack.Screen name="exams/plans" options={{ title: "备考计划" }} />
         <Stack.Screen name="exams/orders" options={{ title: "我的订单" }} />
         <Stack.Screen name="exams/orders/order" options={{ title: "购买冲刺包" }} />
+        <Stack.Screen name="free-courses" options={{ title: "免费课程" }} />
+        <Stack.Screen name="free-courses/list" options={{ title: "课程列表" }} />
+        <Stack.Screen name="free-courses/detail" options={{ title: "课程详情" }} />
+        <Stack.Screen name="free-courses/learn" options={{ title: "学习课程" }} />
+        <Stack.Screen name="achievements" options={{ title: "我的成就" }} />
+        <Stack.Screen name="notifications" options={{ title: "消息中心" }} />
+        <Stack.Screen name="ai" options={{ title: "AI 能力中心" }} />
       </Stack>
       <Toast />
     </Provider>

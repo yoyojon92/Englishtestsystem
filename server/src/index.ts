@@ -11,6 +11,7 @@ import reportRoutes from './routes/report.js';
 import examRoutes from './routes/exam.js';
 import aiRoutes from './routes/ai.js';
 import notificationRoutes from './routes/notification/index.js';
+import freeCourseRoutes from './routes/free-course/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api/v1/reports', reportRoutes);
 app.use('/api/v1/exams', examRoutes);
 app.use('/api/v1/ai', aiRoutes);
 app.use('/api/v1/notifications', notificationRoutes);
+app.use('/api/v1/free-courses', freeCourseRoutes);
 
 // Health check
 app.get('/api/v1/health', (req, res) => {

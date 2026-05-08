@@ -158,6 +158,19 @@ export default function HomeScreen() {
               <Text style={styles.actionDescSecondary}>报名通道</Text>
             </View>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => router.push('/free-courses')}
+          >
+            <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(14,165,233,0.15)' }]}>
+                <Text style={styles.actionEmoji}>🎓</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>免费课程</Text>
+              <Text style={styles.actionDescSecondary}>学习更多</Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
         {/* Latest Report Summary */}

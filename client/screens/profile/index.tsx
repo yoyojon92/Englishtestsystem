@@ -40,10 +40,13 @@ export default function ProfileScreen() {
   const menuItems = [
     { icon: '🔔', title: '消息通知', subtitle: '查看全部消息', route: '/notifications', badge: 2 },
     { icon: '📚', title: '我的课程', subtitle: '查看已购课程', route: '/progress' },
+    { icon: '🎓', title: '免费课程', subtitle: '学习更多内容', route: '/free-courses' },
+    { icon: '🏆', title: '我的成就', subtitle: '学习徽章', route: '/achievements' },
     { icon: '📊', title: '测评报告', subtitle: '历次测评记录', route: '/reports' },
     { icon: '⭐', title: '我的收藏', subtitle: '收藏的课程', route: '/courses' },
     { icon: '📝', title: '学习笔记', subtitle: '我的学习笔记', route: '/progress' },
     { icon: '🎯', title: '能力测评', subtitle: '重新进行测评', route: '/assessment/start' },
+    { icon: '🤖', title: 'AI 学习', subtitle: 'AI外教和口语练习', route: '/ai' },
     { icon: '⚙️', title: '设置', subtitle: '账号与偏好设置', route: '/settings' },
   ];
 
