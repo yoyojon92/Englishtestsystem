@@ -1,20 +1,46 @@
-import express from "express";
-import cors from "cors";
+import express from 'express';
+import cors from 'cors';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import authRoutes from './routes/auth.js';
+import assessmentRoutes from './routes/assessment.js';
+import courseRoutes from './routes/course.js';
+import progressRoutes from './routes/progress.js';
+import reportRoutes from './routes/report.js';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = process.env.PORT || 9091;
+const PORT = process.env.PORT || 9091;
 
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Static files for uploads
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+// API Routes
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/assessments', assessmentRoutes);
+app.use('/api/v1/courses', courseRoutes);
+app.use('/api/v1/progress', progressRoutes);
+app.use('/api/v1/reports', reportRoutes);
+
+// Health check
 app.get('/api/v1/health', (req, res) => {
-  console.log('Health check success');
-  res.status(200).json({ status: 'ok' });
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}/`);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+export default app;

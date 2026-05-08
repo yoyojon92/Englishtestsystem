@@ -22,7 +22,14 @@ export default function RootLayout() {
           headerShown: false
         }}
       >
-        <Stack.Screen name="index" options={{ title: "" }} />
+        <Stack.Screen name="(tabs)" options={{ title: "" }} />
+        <Stack.Screen name="auth" options={{ title: "登录" }} />
+        <Stack.Screen name="assessment-start" options={{ title: "能力测评" }} />
+        <Stack.Screen name="assessment-quiz" options={{ title: "能力测评" }} />
+        <Stack.Screen name="assessment-result" options={{ title: "测评结果" }} />
+        <Stack.Screen name="courses-detail" options={{ title: "课程详情" }} />
+        <Stack.Screen name="reports-index" options={{ title: "报告列表" }} />
+        <Stack.Screen name="reports-detail" options={{ title: "报告详情" }} />
       </Stack>
       <Toast />
     </Provider>
