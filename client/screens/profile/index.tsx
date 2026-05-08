@@ -38,6 +38,7 @@ export default function ProfileScreen() {
   };
 
   const menuItems = [
+    { icon: '🔔', title: '消息通知', subtitle: '查看全部消息', route: '/notifications', badge: 2 },
     { icon: '📚', title: '我的课程', subtitle: '查看已购课程', route: '/progress' },
     { icon: '📊', title: '测评报告', subtitle: '历次测评记录', route: '/reports' },
     { icon: '⭐', title: '我的收藏', subtitle: '收藏的课程', route: '/courses' },
@@ -168,6 +169,11 @@ export default function ProfileScreen() {
                 >
                   <View style={styles.menuIconContainer}>
                     <Text style={styles.menuIcon}>{item.icon}</Text>
+                    {item.badge && (
+                      <View style={styles.badge}>
+                        <Text style={styles.badgeText}>{item.badge}</Text>
+                      </View>
+                    )}
                   </View>
                   <Text style={styles.menuTitle}>{item.title}</Text>
                   <Text style={styles.menuSubtitle}>{item.subtitle}</Text>
@@ -483,6 +489,23 @@ const styles = StyleSheet.create({
   },
   menuIcon: {
     fontSize: 22,
+  },
+  badge: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    backgroundColor: '#FF4757',
+    borderRadius: 10,
+    minWidth: 18,
+    height: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+  },
+  badgeText: {
+    color: '#FFFFFF',
+    fontSize: 10,
+    fontWeight: '700',
   },
   menuTitle: {
     fontSize: 13,

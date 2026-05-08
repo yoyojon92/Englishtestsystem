@@ -55,6 +55,12 @@ const routes = [
         meta: { title: '财务管理', icon: 'Money' },
       },
       {
+        path: 'notifications',
+        name: 'Notifications',
+        component: () => import('@/views/notifications/index.vue'),
+        meta: { title: '消息推送', icon: 'Message' },
+      },
+      {
         path: 'marketing',
         name: 'Marketing',
         component: () => import('@/views/marketing/index.vue'),
