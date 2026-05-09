@@ -18,6 +18,7 @@ import paymentRoutes from './routes/payment.js';
 import mockExamRoutes from './routes/mock-exam.js';
 import prepPlanRoutes from './routes/prep-plan.js';
 import cefrRoutes from './routes/cefr.js';
+import qrcodeRoutes from './routes/qrcode.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -47,6 +48,7 @@ app.use('/api/v1/payment', paymentRoutes);
 app.use('/api/v1/mock-exam', mockExamRoutes);
 app.use('/api/v1/prep-plan', prepPlanRoutes);
 app.use('/api/v1/cefr', cefrRoutes);
+app.use('/api/v1/qrcode', qrcodeRoutes);
 
 // Health check
 app.get('/api/v1/health', (req, res) => {
