@@ -59,20 +59,6 @@ router.get('/', (req: any, res: any) => {
 });
 
 /**
- * GET /api/v1/notifications/:id
- * 获取通知详情
- */
-router.get('/:id', (req: any, res: any) => {
-  const notification = notifications.find(n => n.id === req.params.id);
-  
-  if (!notification) {
-    return res.status(404).json({ success: false, message: '通知不存在' });
-  }
-  
-  res.json({ success: true, data: notification });
-});
-
-/**
  * POST /api/v1/notifications
  * 发送通知
  */
@@ -423,6 +409,20 @@ router.get('/conversations', (req: any, res: any) => {
   const userConversations = conversations.filter(c => c.participants.includes(userId));
   
   res.json({ success: true, data: userConversations });
+});
+
+/**
+ * GET /api/v1/notifications/:id
+ * 获取通知详情
+ */
+router.get('/:id', (req: any, res: any) => {
+  const notification = notifications.find(n => n.id === req.params.id);
+  
+  if (!notification) {
+    return res.status(404).json({ success: false, message: '通知不存在' });
+  }
+  
+  res.json({ success: true, data: notification });
 });
 
 /**

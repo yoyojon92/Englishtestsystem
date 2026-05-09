@@ -49,6 +49,20 @@ export interface PrepareReference {
 const questions: Map<string, Question> = new Map();
 const notices: Map<string, Notice[]> = new Map();
 const knowledgePoints: Map<string, KnowledgePoint[]> = new Map();
+const prepareReferences: Map<string, any> = new Map();
+const questionNotices: Map<string, any[]> = new Map();
+
+// 套系数据
+export interface ExamSet {
+  exam: string;
+  level: string;
+  part: number;
+  instruction: string;
+  questionCount: number;
+  difficulty: string;
+}
+
+export const examSets: ExamSet[] = [];
 
 export const questionStore = {
   // 添加题目
@@ -85,14 +99,17 @@ export const questionStore = {
     return knowledgePoints.get(questionId) || [];
   },
 
-  // 添加知识点
-  addKnowledgePoints(questionId: string, points: KnowledgePoint[]): void {
-    knowledgePoints.set(questionId, points);
+  // 添加单个知识点
+  addKnowledgePoint(questionId: string, point: KnowledgePoint): void {
+    const existing = knowledgePoints.get(questionId) || [];
+    existing.push(point);
+    knowledgePoints.set(questionId, existing);
   },
 
-  // 按ID获取题目
-  getQuestionById(id: string): Question | undefined {
-    return questions.get(id);
+  // 添加多个知识点
+  addKnowledgePoints(questionId: string, points: KnowledgePoint[]): void {
+    const existing = knowledgePoints.get(questionId) || [];
+    knowledgePoints.set(questionId, [...existing, ...points]);
   },
 
   // 清空所有数据
@@ -116,4 +133,5 @@ export const questionStore = {
   }
 };
 
+export { questions, knowledgePoints, prepareReferences, questionNotices };
 export default questionStore;

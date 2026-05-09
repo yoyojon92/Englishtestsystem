@@ -20,10 +20,20 @@ import prepPlanRoutes from './routes/prep-plan.js';
 import cefrRoutes from './routes/cefr.js';
 import qrcodeRoutes from './routes/qrcode.js';
 import questionsRoutes from './routes/questions.js';
+import { loadExamFromFile } from './db/loadExamData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 9091;
+
+// Load KET questions into memory on startup (for development without PostgreSQL)
+const ketJSONPath = path.join(__dirname, 'db/questions/ket/reading_part1_test1.json');
+try {
+  loadExamFromFile(ketJSONPath);
+  console.log('✅ KET questions loaded into memory');
+} catch (err) {
+  console.log('⚠️ Could not load KET questions:', (err as Error).message);
+}
 
 // Middleware
 app.use(cors());

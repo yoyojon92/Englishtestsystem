@@ -1,37 +1,55 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
-import { query } from '../db';
+// TODO: 生产环境替换为 PostgreSQL
+// import { query } from '../db';
+import { questionStore, type Question } from '../db/inMemory';
 
 const router = Router();
 
 /**
  * Get all exam sets
  * GET /api/v1/questions/sets
+ * 
+ * 生产环境 SQL:
+ * SELECT DISTINCT exam_type, level, part, instruction FROM questions ORDER BY exam_type, part
  */
 router.get('/sets', async (req: Request, res: Response) => {
   try {
     const { level, exam_type } = req.query;
     
-    let sql = 'SELECT DISTINCT exam_type, level, part, instruction FROM questions ORDER BY exam_type, part';
-    const params: string[] = [];
+    const allQuestions = questionStore.getAllQuestions();
     
-    if (level || exam_type) {
-      sql = 'SELECT DISTINCT exam_type, level, part, instruction FROM questions WHERE 1=1';
-      if (level) {
-        sql += ' AND level = $' + (params.length + 1);
-        params.push(level as string);
+    // 按 exam_type, level, part 分组
+    const setsMap = new Map<string, { exam_type: string; level: string; part: number; instruction: string }>();
+    
+    for (const q of allQuestions) {
+      const key = `${q.exam_type}-${q.level}-${q.part}`;
+      if (!setsMap.has(key)) {
+        setsMap.set(key, {
+          exam_type: q.exam_type,
+          level: q.level,
+          part: q.part,
+          instruction: q.instruction
+        });
       }
-      if (exam_type) {
-        sql += ' AND exam_type = $' + (params.length + 1);
-        params.push(exam_type as string);
-      }
-      sql += ' ORDER BY exam_type, part';
     }
     
-    const result = await query(sql, params);
+    let sets = Array.from(setsMap.values()).sort((a, b) => {
+      if (a.exam_type !== b.exam_type) return a.exam_type.localeCompare(b.exam_type);
+      return a.part - b.part;
+    });
+    
+    // 筛选
+    if (level) {
+      sets = sets.filter(s => s.level.toLowerCase() === (level as string).toLowerCase());
+    }
+    if (exam_type) {
+      sets = sets.filter(s => s.exam_type.toLowerCase() === (exam_type as string).toLowerCase());
+    }
+    
     res.json({
       success: true,
-      data: result.rows
+      data: sets
     });
   } catch (error) {
     console.error('Error fetching exam sets:', error);
@@ -40,59 +58,63 @@ router.get('/sets', async (req: Request, res: Response) => {
 });
 
 /**
- * Get questions by exam type
+ * Get single question by ID
+ * GET /api/v1/questions/detail/:id
+ * 
+ * 生产环境 SQL:
+ * SELECT * FROM questions WHERE id = $1
+ */
+router.get('/detail/:id', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    
+    const question = questionStore.getQuestionById(id);
+    
+    if (!question) {
+      return res.status(404).json({ error: 'Question not found' });
+    }
+    
+    const result = {
+      ...question,
+      notices: questionStore.getNotices(id),
+      knowledge_points: questionStore.getKnowledgePoints(id)
+    };
+    
+    res.json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    console.error('Error fetching question:', error);
+    res.status(500).json({ error: 'Failed to fetch question' });
+  }
+});
+
+/**
+ * Get questions by exam type and part
  * GET /api/v1/questions/:examType/:part?
+ * 
+ * 生产环境 SQL:
+ * SELECT * FROM questions WHERE exam_type = $1 AND (part = $2 OR $2 IS NULL) ORDER BY id
  */
 router.get('/:examType/:part?', async (req: Request, res: Response) => {
   try {
     const { examType, part } = req.params;
+    const partNum = part ? parseInt(part, 10) : undefined;
     
-    let sql = `
-      SELECT 
-        q.id,
-        q.exam_type,
-        q.level,
-        q.part,
-        q.section_type,
-        q.instruction,
-        q.type,
-        q.question_text,
-        q.options,
-        q.correct_answer,
-        q.explanation,
-        q.difficulty,
-        q.audio_url,
-        q.image_url
-      FROM questions q
-      WHERE q.exam_type = $1
-    `;
-    const params: (string | number)[] = [examType];
+    const questions = questionStore.getQuestionsByExam(examType.toUpperCase(), partNum);
     
-    if (part) {
-      sql += ' AND q.part = $2';
-      params.push(parseInt(part));
-    }
-    
-    sql += ' ORDER BY q.part, q.id';
-    
-    const result = await query(sql, params);
-    
-    // Fetch notices for each question set
-    const noticesSql = `
-      SELECT n.* FROM question_notices n
-      JOIN questions q ON n.question_id = q.id
-      WHERE q.exam_type = $1
-      GROUP BY n.id
-      ORDER BY n.id
-    `;
-    const noticesResult = await query(noticesSql, [examType]);
+    // 附加 notices 和 knowledge_points
+    const result = questions.map(q => ({
+      ...q,
+      notices: questionStore.getNotices(q.id),
+      knowledge_points: questionStore.getKnowledgePoints(q.id)
+    }));
     
     res.json({
       success: true,
-      data: {
-        questions: result.rows,
-        notices: noticesResult.rows
-      }
+      data: result,
+      total: result.length
     });
   } catch (error) {
     console.error('Error fetching questions:', error);
@@ -101,197 +123,100 @@ router.get('/:examType/:part?', async (req: Request, res: Response) => {
 });
 
 /**
- * Get question by ID with details
- * GET /api/v1/questions/detail/:id
- */
-router.get('/detail/:id', async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    
-    // Get question details
-    const questionSql = `
-      SELECT 
-        q.*,
-        json_agg(DISTINCT jsonb_build_object(
-          'id', kp.id,
-          'tag', kp.tag,
-          'level', kp.level,
-          'unit', kp.unit,
-          'section', kp.section,
-          'page', kp.page
-        )) FILTER (WHERE kp.id IS NOT NULL) as knowledge_points
-      FROM questions q
-      LEFT JOIN question_knowledge_points qkp ON q.id = qkp.question_id
-      LEFT JOIN knowledge_points kp ON qkp.knowledge_point_id = kp.id
-      WHERE q.id = $1
-      GROUP BY q.id
-    `;
-    const questionResult = await query(questionSql, [id]);
-    
-    if (questionResult.rows.length === 0) {
-      return res.status(404).json({ error: 'Question not found' });
-    }
-    
-    // Get notices for this question's exam set
-    const noticesSql = `
-      SELECT n.* FROM question_notices n
-      WHERE n.question_id IN (
-        SELECT id FROM questions 
-        WHERE exam_type = (SELECT exam_type FROM questions WHERE id = $1)
-        AND part = (SELECT part FROM questions WHERE id = $1)
-      )
-      ORDER BY n.id
-    `;
-    const noticesResult = await query(noticesSql, [id]);
-    
-    res.json({
-      success: true,
-      data: {
-        ...questionResult.rows[0],
-        notices: noticesResult.rows
-      }
-    });
-  } catch (error) {
-    console.error('Error fetching question detail:', error);
-    res.status(500).json({ error: 'Failed to fetch question detail' });
-  }
-});
-
-/**
- * Get knowledge points
- * GET /api/v1/questions/knowledge-points
- */
-router.get('/knowledge-points/all', async (req: Request, res: Response) => {
-  try {
-    const result = await query(
-      'SELECT * FROM knowledge_points ORDER BY level, tag'
-    );
-    res.json({
-      success: true,
-      data: result.rows
-    });
-  } catch (error) {
-    console.error('Error fetching knowledge points:', error);
-    res.status(500).json({ error: 'Failed to fetch knowledge points' });
-  }
-});
-
-/**
- * Get knowledge points by level
- * GET /api/v1/questions/knowledge-points/:level
- */
-router.get('/knowledge-points/:level', async (req: Request, res: Response) => {
-  try {
-    const { level } = req.params;
-    const result = await query(
-      'SELECT * FROM knowledge_points WHERE level = $1 ORDER BY tag',
-      [level]
-    );
-    res.json({
-      success: true,
-      data: result.rows
-    });
-  } catch (error) {
-    console.error('Error fetching knowledge points:', error);
-    res.status(500).json({ error: 'Failed to fetch knowledge points' });
-  }
-});
-
-/**
- * Submit exam answers and get results
+ * Submit answers and get results
  * POST /api/v1/questions/submit
+ * 
+ * 生产环境 SQL:
+ * SELECT correct_answer FROM questions WHERE id = ANY($1)
  */
 router.post('/submit', async (req: Request, res: Response) => {
   try {
-    const { examType, answers } = req.body;
+    const { answers } = req.body as { answers: Array<{ question_id: string; user_answer: string }> };
     
-    if (!examType || !answers || !Array.isArray(answers)) {
-      return res.status(400).json({ 
-        error: 'Invalid request body',
-        required: ['examType', 'answers']
+    if (!answers || !Array.isArray(answers)) {
+      return res.status(400).json({ error: 'Invalid answers format' });
+    }
+    
+    const results = [];
+    let correctCount = 0;
+    
+    for (const answer of answers) {
+      const question = questionStore.getQuestionById(answer.question_id);
+      
+      if (!question) {
+        results.push({
+          question_id: answer.question_id,
+          status: 'not_found'
+        });
+        continue;
+      }
+      
+      const isCorrect = question.correct_answer.toUpperCase() === answer.user_answer.toUpperCase();
+      
+      if (isCorrect) correctCount++;
+      
+      results.push({
+        question_id: answer.question_id,
+        user_answer: answer.user_answer,
+        correct_answer: question.correct_answer,
+        is_correct: isCorrect,
+        explanation: question.explanation,
+        difficulty: question.difficulty,
+        knowledge_points: questionStore.getKnowledgePoints(answer.question_id)
       });
     }
     
-    // Fetch all questions for the exam type
-    const questionsSql = `
-      SELECT id, question_text, correct_answer, difficulty 
-      FROM questions 
-      WHERE exam_type = $1
-    `;
-    const questionsResult = await query(questionsSql, [examType]);
-    
-    // Calculate results
-    const results = answers.map(answer => {
-      const question = questionsResult.rows.find(q => q.id === answer.questionId);
-      if (!question) {
-        return {
-          questionId: answer.questionId,
-          status: 'not_found'
-        };
-      }
-      
-      const isCorrect = question.correct_answer.toUpperCase() === answer.answer.toUpperCase();
-      return {
-        questionId: answer.questionId,
-        userAnswer: answer.answer,
-        correctAnswer: question.correct_answer,
-        isCorrect,
-        difficulty: question.difficulty
-      };
-    });
-    
-    // Calculate scores
-    const correctCount = results.filter(r => r.isCorrect).length;
-    const totalCount = results.length;
-    const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+    const score = answers.length > 0 ? Math.round((correctCount / answers.length) * 100) : 0;
     
     res.json({
       success: true,
       data: {
-        examType,
-        totalQuestions: totalCount,
-        correctCount,
-        incorrectCount: totalCount - correctCount,
+        results,
         score,
-        results
+        total: answers.length,
+        correct: correctCount,
+        incorrect: answers.length - correctCount
       }
     });
   } catch (error) {
-    console.error('Error submitting exam:', error);
-    res.status(500).json({ error: 'Failed to submit exam' });
-  }
-});
-
-/**
- * Get exam statistics
- * GET /api/v1/questions/stats/:examType
- */
-router.get('/stats/:examType', async (req: Request, res: Response) => {
-  try {
-    const { examType } = req.params;
-    
-    const statsSql = `
-      SELECT 
-        COUNT(*) as total_questions,
-        COUNT(DISTINCT part) as total_parts,
-        COUNT(DISTINCT level) as total_levels,
-        COUNT(DISTINCT difficulty) as difficulty_types,
-        json_object_agg(difficulty, COUNT(*)) as by_difficulty,
-        json_object_agg(part, COUNT(*)) as by_part
-      FROM questions
-      WHERE exam_type = $1
-      GROUP BY exam_type
-    `;
-    const result = await query(statsSql, [examType]);
-    
-    res.json({
-      success: true,
-      data: result.rows[0] || null
-    });
-  } catch (error) {
-    console.error('Error fetching stats:', error);
-    res.status(500).json({ error: 'Failed to fetch statistics' });
+    console.error('Error submitting answers:', error);
+    res.status(500).json({ error: 'Failed to submit answers' });
   }
 });
 
 export default router;
+
+/**
+ * ================================================================================
+ * 切换到 PostgreSQL 生产环境的步骤
+ * ================================================================================
+ * 
+ * 1. 安装并启动 PostgreSQL:
+ *    - macOS: brew install postgresql && brew services start postgresql
+ *    - Ubuntu: sudo apt install postgresql && sudo systemctl start postgresql
+ *    - Docker: docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=xxx postgres:15
+ * 
+ * 2. 创建数据库:
+ *    createdb -U postgres english_platform
+ * 
+ * 3. 执行迁移脚本:
+ *    psql -U postgres -d english_platform -f src/db/migrations/001_init.sql
+ *    psql -U postgres -d english_platform -f src/db/migrations/002_seed_data.sql
+ *    psql -U postgres -d english_platform -f src/db/migrations/003_questions_enhanced.sql
+ * 
+ * 4. 导入真题数据:
+ *    npx tsx scripts/import-questions.ts src/db/questions/ket/reading_part1_test1.json
+ * 
+ * 5. 配置环境变量:
+ *    在 .env 中设置 DATABASE_URL=postgresql://postgres:password@localhost:5432/english_platform
+ * 
+ * 6. 更新 API 路由:
+ *    - 移除 inMemory 导入
+ *    - 启用 PostgreSQL query 函数
+ *    - 使用上方注释中的生产环境 SQL 查询
+ * 
+ * 7. 重启服务:
+ *    pkill -f tsx && npx tsx src/index.ts
+ * 
+ * ================================================================================
+ */

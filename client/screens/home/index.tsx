@@ -161,6 +161,19 @@ export default function HomeScreen() {
 
           <TouchableOpacity
             style={styles.actionCard}
+            onPress={() => router.push('/ket-practice')}
+          >
+            <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(139,92,246,0.15)' }]}>
+                <Text style={styles.actionEmoji}>📝</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>KET练习</Text>
+              <Text style={styles.actionDescSecondary}>真题训练</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
             onPress={() => router.push('/free-courses')}
           >
             <View style={styles.actionSecondary}>

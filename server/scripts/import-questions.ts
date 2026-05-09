@@ -394,5 +394,8 @@ async function main() {
   console.log(`\n✅ 导入完成!\n`);
 }
 
+// 导出函数供其他模块使用
+export { importExamJson, loadQuestions, getQuestionSet, getQuestionsBySet };
+
 // 运行
 main().catch(console.error);
