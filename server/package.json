@@ -7,7 +7,10 @@
     "dev": "bash ../.cozeproj/scripts/server_dev_run.sh",
     "preinstall": "npx only-allow pnpm",
     "start": "NODE_ENV=production PORT=${PORT:-5000} node dist/index.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "tsx tests/cefr-calculation.test.ts && tsx tests/payment-signature.test.ts",
+    "test:api": "tsx tests/api-response.test.ts",
+    "test:all": "pnpm run test && pnpm run test:api"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.95.3",
