@@ -6,6 +6,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { questions, questionNotices, knowledgePoints, prepareReferences } from './inMemory.js';
+import type { Question, Notice, KnowledgePoint } from './inMemory.js';
 
 interface ExamQuestion {
   id: string;

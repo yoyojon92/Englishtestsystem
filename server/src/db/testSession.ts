@@ -1,7 +1,7 @@
 // 测试会话管理模块
 // 支持渠道追踪、完整测试流程
 
-import { questionStore } from './inMemory';
+import questionStore from './inMemory';
 
 // 题目类型
 export type QuestionType = 'multiple_choice' | 'match_notice' | 'fill_blank' | 'reading_comprehension';
@@ -120,7 +120,7 @@ export function createTestSession(params: {
   
   if (params.examType) {
     // 按考试类型获取
-    const sets = questionStore.getQuestionSets();
+    const sets = questionStore.getExamSets();
     const targetSets = sets.filter(s => s.exam_type === params.examType);
     
     const selectedQuestions: any[] = [];

@@ -203,6 +203,31 @@ export default function HomeScreen() {
             onPress={() => router.push('/free-courses')}
           >
             <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(99,102,241,0.15)' }]}>
+                <Text style={styles.actionEmoji}>🎁</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>免费资源</Text>
+              <Text style={styles.actionDescSecondary}>学习资料</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => router.push('/share')}
+          >
+            <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(236,72,153,0.15)' }]}>
+                <Text style={styles.actionEmoji}>🤝</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>分享邀请</Text>
+              <Text style={styles.actionDescSecondary}>推荐有礼</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => router.push('/booking')}
+            <View style={styles.actionSecondary}>
               <View style={[styles.actionIcon, { backgroundColor: 'rgba(14,165,233,0.15)' }]}>
                 <Text style={styles.actionEmoji}>🎓</Text>
               </View>

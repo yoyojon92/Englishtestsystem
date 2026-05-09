@@ -7,6 +7,7 @@
 export interface Question {
   id: string;
   exam_type: string;
+  skill?: string;
   level: string;
   part: number;
   question_type: string;
@@ -45,27 +46,32 @@ export interface PrepareReference {
   page: number;
 }
 
-// 内存存储
-const questions: Map<string, Question> = new Map();
-const notices: Map<string, Notice[]> = new Map();
-const knowledgePoints: Map<string, KnowledgePoint[]> = new Map();
-const prepareReferences: Map<string, any> = new Map();
-const questionNotices: Map<string, any[]> = new Map();
-
-// 套系数据
 export interface ExamSet {
-  exam: string;
-  level: string;
+  set_id: string;
+  exam_type: string;
+  skill: string;
   part: number;
+  test_number: number;
+  level: string;
   instruction: string;
-  questionCount: number;
-  difficulty: string;
+  total_questions: number;
+  questions: Question[];
+  created_at: Date;
 }
 
-export const examSets: ExamSet[] = [];
+// 内存存储
+const questions = new Map<string, Question>();
+const examSets = new Map<string, ExamSet>();
+const notices = new Map<string, Notice[]>();
+const knowledgePoints = new Map<string, KnowledgePoint[]>();
+const prepareReferences = new Map<string, PrepareReference[]>();
+const questionNotices = new Map<string, Notice[]>();
 
-export const questionStore = {
-  // 添加题目
+/**
+ * 题目存储操作
+ */
+const questionStore = {
+  // 添加单个题目
   addQuestion(question: Question): void {
     questions.set(question.id, question);
   },
@@ -83,36 +89,41 @@ export const questionStore = {
   // 按考试类型和部分获取题目
   getQuestionsByExam(examType: string, part?: number): Question[] {
     return Array.from(questions.values()).filter(q => {
-      if (q.exam_type.toLowerCase() !== examType.toLowerCase()) return false;
+      if (q.exam_type !== examType) return false;
       if (part !== undefined && q.part !== part) return false;
       return true;
     });
   },
 
-  // 获取题目的通知
-  getNotices(questionId: string): Notice[] {
-    return notices.get(questionId) || [];
+  // 添加试卷
+  addExamSet(set: ExamSet): void {
+    examSets.set(set.set_id, set);
+  },
+
+  // 获取试卷列表
+  getExamSets(examType?: string): ExamSet[] {
+    const allSets = Array.from(examSets.values());
+    if (examType) {
+      return allSets.filter(s => s.exam_type === examType);
+    }
+    return allSets;
+  },
+
+  // 按试卷获取题目
+  getQuestionsBySet(setId: string): Question[] {
+    const set = examSets.get(setId);
+    if (!set) return [];
+    return set.questions;
   },
 
   // 添加通知
-  addNotices(questionId: string, questionNotices: Notice[]): void {
-    notices.set(questionId, questionNotices);
+  addNotice(questionId: string, noticeList: Notice[]): void {
+    notices.set(questionId, noticeList);
   },
 
-  // 获取题目的知识点
-  getKnowledgePoints(questionId: string): KnowledgePoint[] {
-    return knowledgePoints.get(questionId) || [];
-  },
-
-  // 获取快速测试题目（随机抽取指定数量）
-  getQuickTestQuestions(count: number = 5): Question[] {
-    const allQuestions = Array.from(questions.values());
-    // 随机打乱
-    for (let i = allQuestions.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
-    }
-    return allQuestions.slice(0, Math.min(count, allQuestions.length));
+  // 获取通知
+  getNotices(questionId: string): Notice[] {
+    return notices.get(questionId) || [];
   },
 
   // 添加单个知识点
@@ -128,11 +139,28 @@ export const questionStore = {
     knowledgePoints.set(questionId, [...existing, ...points]);
   },
 
+  // 获取知识点
+  getKnowledgePoints(questionId: string): KnowledgePoint[] {
+    return knowledgePoints.get(questionId) || [];
+  },
+
+  // 获取快速测试题目（随机抽取指定数量）
+  getQuickTestQuestions(count: number = 5): Question[] {
+    const allQuestions = Array.from(questions.values());
+    // 随机打乱
+    for (let i = allQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+    }
+    return allQuestions.slice(0, Math.min(count, allQuestions.length));
+  },
+
   // 清空所有数据
   clear(): void {
     questions.clear();
     notices.clear();
     knowledgePoints.clear();
+    examSets.clear();
   },
 
   // 获取统计数据
@@ -149,5 +177,5 @@ export const questionStore = {
   }
 };
 
-export { questions, knowledgePoints, prepareReferences, questionNotices };
+export { questions, knowledgePoints, prepareReferences, questionNotices, examSets };
 export default questionStore;

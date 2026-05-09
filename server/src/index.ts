@@ -89,6 +89,10 @@ app.get('/api/v1/debug/questions', (req, res) => {
   });
 });
 
+// Share API 路由 (分享链接与渠道追踪)
+import shareRouter from './routes/share';
+app.use('/api/v1/share', shareRouter);
+
 // Error handling middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error:', err);

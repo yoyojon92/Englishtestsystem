@@ -2,7 +2,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 // TODO: 生产环境替换为 PostgreSQL
 // import { query } from '../db';
-import { questionStore, questions, type Question } from '../db/inMemory';
+import questionStore, { questions } from '../db/inMemory';
 
 const router = Router();
 
@@ -74,7 +74,7 @@ router.get('/detail/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     
-    const question = questionStore.getQuestionById(id);
+    const question = questionStore.getQuestion(id);
     
     if (!question) {
       return res.status(404).json({ error: 'Question not found' });
@@ -107,14 +107,15 @@ router.get('/quick-test', async (req: Request, res: Response) => {
     const allQuestions = questionStore.getQuickTestQuestions(count);
     
     const result = allQuestions.map((q) => ({
-      question_id: q.question_id,
+      question_id: q.id,
       question_type: q.question_type,
       question_text: q.question_text,
-      skill: q.skill,
+      exam_type: q.exam_type,
+      level: q.level,
+      part: q.part,
       difficulty: q.difficulty,
-      options: [], // 选项从 notices 获取
-      notices: questionStore.getNotices(q.question_id),
-      knowledge_points: questionStore.getKnowledgePoints(q.question_id),
+      notices: q.notices || [],
+      knowledge_points: q.knowledge_points || [],
       correct_answer: q.correct_answer,
       explanation: q.explanation
     }));
