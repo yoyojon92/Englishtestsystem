@@ -20,6 +20,9 @@ import prepPlanRoutes from './routes/prep-plan.js';
 import cefrRoutes from './routes/cefr.js';
 import qrcodeRoutes from './routes/qrcode.js';
 import questionsRoutes from './routes/questions.js';
+import learningPlanRoutes from './routes/learning-plan.js';
+import answersRoutes from './routes/answers.js';
+import diagnosisRoutes from './routes/diagnosis.js';
 import { loadExamFromFile } from './db/loadExamData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -61,6 +64,9 @@ app.use('/api/v1/prep-plan', prepPlanRoutes);
 app.use('/api/v1/cefr', cefrRoutes);
 app.use('/api/v1/qrcode', qrcodeRoutes);
 app.use('/api/v1/questions', questionsRoutes);
+app.use('/api/v1/learning-plan', learningPlanRoutes);
+app.use('/api/v1/answers', answersRoutes);
+app.use('/api/v1/diagnosis', diagnosisRoutes);
 
 // Health check
 app.get('/api/v1/health', (req, res) => {

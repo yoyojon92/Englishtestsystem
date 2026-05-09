@@ -63,6 +63,8 @@ export default function RootLayout() {
         <Stack.Screen name="teacher/schedule" options={{ title: "课程表" }} />
         <Stack.Screen name="teacher/stats" options={{ title: "数据看板" }} />
         <Stack.Screen name="ket-practice" options={{ title: "KET 练习" }} />
+        <Stack.Screen name="learning-plan" options={{ title: "学习计划" }} />
+        <Stack.Screen name="quick-test" options={{ title: "快速测试" }} />
       </Stack>
       <Toast />
     </Provider>

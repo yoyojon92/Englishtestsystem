@@ -104,7 +104,7 @@ export default function HomeScreen() {
         <View style={styles.quickActions}>
           <TouchableOpacity
             style={styles.actionCard}
-            onPress={() => router.push('/assessment-start')}
+            onPress={() => router.push('/quick-test')}
           >
             <LinearGradient
               colors={['#6C63FF', '#896BFF']}
@@ -115,8 +115,8 @@ export default function HomeScreen() {
               <View style={styles.actionIcon}>
                 <Text style={styles.actionEmoji}>🎯</Text>
               </View>
-              <Text style={styles.actionTitle}>能力测评</Text>
-              <Text style={styles.actionDesc}>了解英语水平</Text>
+              <Text style={styles.actionTitle}>1分钟快测</Text>
+              <Text style={styles.actionDesc}>立即知水平</Text>
             </LinearGradient>
           </TouchableOpacity>
 
