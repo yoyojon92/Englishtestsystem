@@ -72,7 +72,7 @@ router.get('/sets', async (req: Request, res: Response) => {
  */
 router.get('/detail/:id', async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id as string;
     
     const question = questionStore.getQuestion(id);
     
@@ -140,7 +140,7 @@ router.get('/quick-test', async (req: Request, res: Response) => {
  */
 router.get('/:examType/:part?', async (req: Request, res: Response) => {
   try {
-    const { examType, part } = req.params;
+    const examType = req.params.examType as string; const part = req.params.part as string;
     const partNum = part ? parseInt(part, 10) : undefined;
     
     const questions = questionStore.getQuestionsByExam(examType.toUpperCase(), partNum);
@@ -182,7 +182,7 @@ router.post('/submit', async (req: Request, res: Response) => {
     let correctCount = 0;
     
     for (const answer of answers) {
-      const question = questionStore.getQuestionById(answer.question_id);
+      const question = questionStore.getQuestion(answer.question_id);
       
       if (!question) {
         results.push({

@@ -12,7 +12,7 @@ const SIGN_SECRET = process.env.SHARE_LINK_SECRET || 'nutshell_english_secret_ke
 export const SHARE_DOMAIN = process.env.SHARE_DOMAIN || 'https://example.com';
 
 // 分享链接参数接口
-export interface ShareParams {
+export interface ShareParams{
   test_id: string;      // 测试模板ID (必填)
   source: string;       // 来源渠道 (必填): wechat/mini_program/xhs/douyin
   ref_id: string;        // 推荐人/分享者ID (必填)
@@ -128,7 +128,7 @@ function md5(input: string): string {
 /**
  * 渠道统计接口
  */
-export interface ChannelStats {
+export interface ChannelStats{
   channel: string;
   source: string;
   clicks: number;
@@ -224,16 +224,4 @@ export function getChannelStats(source?: string, channel?: string): ChannelStats
 }
 
 // 导出类型
-export type { ShareParams, ChannelStats, ShareAction, TrackingResult };
 
-export default {
-  generateShareLink,
-  parseShareParams,
-  verifyLinkSign,
-  recordLinkClick,
-  recordTestStart,
-  recordTestCompletion,
-  recordConversion,
-  getChannelStats,
-  SHARE_DOMAIN,
-};

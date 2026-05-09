@@ -85,7 +85,8 @@ app.get('/api/v1/health', (req, res) => {
 app.get('/api/v1/debug/questions', (req, res) => {
   res.json({ 
     questionsSize: questions.size,
-    questionIds: Array.from(questions.keys()).slice(0, 5)
+    questionIds: Array.from(questions.keys()).slice(0, 5),
+    sample: Array.from(questions.values())[0]
   });
 });
 

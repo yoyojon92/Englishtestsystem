@@ -70,6 +70,7 @@ export default function RootLayout() {
         <Stack.Screen name="test/playing" options={{ title: "答题中", headerShown: false }} />
         <Stack.Screen name="test/report" options={{ title: "测试报告", headerShown: false }} />
         <Stack.Screen name="share" options={{ title: "分享给好友" }} />
+	        <Stack.Screen name="admin" options={{ title: "管理后台" }} />
       </Stack>
       <Toast />
     </Provider>

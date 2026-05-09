@@ -223,7 +223,7 @@ router.post('/logs', async (req: Request, res: Response) => {
  */
 router.get('/sessions/:sessionId', async (req: Request, res: Response) => {
   try {
-    const { sessionId } = req.params;
+    const sessionId = req.params.sessionId as string;
     const session = sessions.get(sessionId);
 
     if (!session) {

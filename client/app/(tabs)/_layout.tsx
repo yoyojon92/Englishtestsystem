@@ -26,7 +26,7 @@ export default function TabLayout() {
   if (Platform.OS === 'web') {
     tabBarStyle = {
       ...tabBarStyle,
-      height: 'auto',
+      height: 60,
     };
   }
 

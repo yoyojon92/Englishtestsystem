@@ -41,7 +41,7 @@ export default function TestPlaying({}: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Map<string, { answer: string; timeSpent: number }>>(new Map());
-  const [remainingTime, setRemainingTime] = useState(parseInt(totalTime) || 900);
+  const [remainingTime, setRemainingTime] = useState(typeof totalTime === 'string' ? parseInt(totalTime) : totalTime);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   

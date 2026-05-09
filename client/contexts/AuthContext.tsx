@@ -12,7 +12,11 @@
 import React, { createContext, useContext, ReactNode } from "react";
 
 interface UserOut {
-
+  id: string;
+  phone: string;
+  name?: string;
+  role: 'parent' | 'student' | 'teacher';
+  createdAt: string;
 }
 
 interface AuthContextType {

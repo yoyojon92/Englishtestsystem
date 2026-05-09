@@ -59,8 +59,8 @@ export default function HomeScreen() {
     setRefreshing(false);
   };
 
-  const getLevelColor = (level: string) => {
-    const colors: Record<string, string[]> = {
+  const getLevelColor = (level: string): [string, string] => {
+    const colors: Record<string, [string, string]> = {
       'Pre-A1': ['#4CAF50', '#8BC34A'],
       'A1': ['#2196F3', '#03A9F4'],
       'A2': ['#9C27B0', '#E91E63'],
@@ -227,6 +227,7 @@ export default function HomeScreen() {
           <TouchableOpacity
             style={styles.actionCard}
             onPress={() => router.push('/booking')}
+          >
             <View style={styles.actionSecondary}>
               <View style={[styles.actionIcon, { backgroundColor: 'rgba(14,165,233,0.15)' }]}>
                 <Text style={styles.actionEmoji}>🎓</Text>

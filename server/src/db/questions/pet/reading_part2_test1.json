@@ -1,0 +1,141 @@
+{
+  "exam": "PET Reading Part 2",
+  "level": "B1",
+  "part": 2,
+  "instruction": "Read the sentences and choose the correct word to fill in each gap.",
+  "total_questions": 6,
+  "questions": [
+    {
+      "id": "pet_r2_t1_q1",
+      "type": "multiple_choice",
+      "question": "The children _____ in the garden when it started to rain.",
+      "options": ["were playing", "is playing", "play", "played"],
+      "answer": "A",
+      "explanation": "用过去进行时（were playing）表示在过去某一时刻正在进行的动作。",
+      "difficulty": "medium",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "过去进行时",
+          "sub_skill": "grammar",
+          "prepare_reference": {
+            "level": "Prepare Level 3 (B1)",
+            "unit": "Unit 1 - Past Tenses",
+            "section": "1.2 Past Continuous",
+            "page": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "pet_r2_t1_q2",
+      "type": "multiple_choice",
+      "question": "If I _____ more time, I would learn to play the guitar.",
+      "options": ["had", "have", "has", "would have"],
+      "answer": "A",
+      "explanation": "与现在事实相反的虚拟语气，从句用过去式 'had'。",
+      "difficulty": "hard",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "虚拟语气",
+          "sub_skill": "grammar",
+          "prepare_reference": {
+            "level": "Prepare Level 3 (B1)",
+            "unit": "Unit 4 - Conditionals",
+            "section": "4.1 If clauses",
+            "page": 38
+          }
+        }
+      ]
+    },
+    {
+      "id": "pet_r2_t1_q3",
+      "type": "multiple_choice",
+      "question": "She has lived in London _____ ten years.",
+      "options": ["for", "since", "during", "while"],
+      "answer": "A",
+      "explanation": "'for + 时间段' 表示持续的时间，与现在完成时连用。",
+      "difficulty": "easy",
+      "cognitive_type": "understanding",
+      "knowledge_points": [
+        {
+          "tag": "时间介词 for/since",
+          "sub_skill": "grammar",
+          "prepare_reference": {
+            "level": "Prepare Level 3 (B1)",
+            "unit": "Unit 2 - Present Perfect",
+            "section": "2.1 How long...?",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "pet_r2_t1_q4",
+      "type": "multiple_choice",
+      "question": "The film was so _____ that everyone cried at the end.",
+      "options": ["sad", "sadly", "sadness", "sadnessly"],
+      "answer": "A",
+      "explanation": "'so + 形容词' 后接名词，sad 是形容词作定语修饰 'film'。",
+      "difficulty": "medium",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "形容词与副词",
+          "sub_skill": "vocabulary",
+          "prepare_reference": {
+            "level": "Prepare Level 3 (B1)",
+            "unit": "Unit 3 - Word Formation",
+            "section": "3.1 Adjectives and Adverbs",
+            "page": 28
+          }
+        }
+      ]
+    },
+    {
+      "id": "pet_r2_t1_q5",
+      "type": "multiple_choice",
+      "question": "I don't mind _____ the window, but I prefer not to clean it.",
+      "options": ["opening", "to open", "open", "opened"],
+      "answer": "A",
+      "explanation": "'mind + 动名词' 结构，表示在意做某事。",
+      "difficulty": "medium",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "动名词用法",
+          "sub_skill": "grammar",
+          "prepare_reference": {
+            "level": "Prepare Level 3 (B1)",
+            "unit": "Unit 5 - Gerunds and Infinitives",
+            "section": "5.1 -ing vs to",
+            "page": 48
+          }
+        }
+      ]
+    },
+    {
+      "id": "pet_r2_t1_q6",
+      "type": "multiple_choice",
+      "question": "By the time we arrived, the meeting _____.",
+      "options": ["had finished", "finished", "has finished", "was finishing"],
+      "answer": "A",
+      "explanation": "'by the time' 引导的时间状语从句，主句用过去完成时。",
+      "difficulty": "hard",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "过去完成时",
+          "sub_skill": "grammar",
+          "prepare_reference": {
+            "level": "Prepare Level 3 (B1)",
+            "unit": "Unit 1 - Past Perfect",
+            "section": "1.3 By the time...",
+            "page": 14
+          }
+        }
+      ]
+    }
+  ]
+}

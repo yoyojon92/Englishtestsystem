@@ -1,0 +1,124 @@
+{
+  "exam": "KET Reading Part 3",
+  "level": "A2",
+  "part": 3,
+  "instruction": "Read the messages and choose the correct answer.",
+  "total_questions": 5,
+  "questions": [
+    {
+      "id": "ket_r3_t1_q1",
+      "type": "multiple_choice",
+      "question": "What does Tom want Sarah to do?",
+      "context": "Tom: Hi Sarah, can you feed the cat while I'm away this weekend? I'll be at my friend's house. Thanks!",
+      "options": ["Feed his cat", "Visit his friend", "Come to his house", "Look after his dog"],
+      "answer": "A",
+      "explanation": "Tom 说 'can you feed the cat'，请求 Sarah 在他不在的时候喂猫。",
+      "difficulty": "easy",
+      "cognitive_type": "understanding",
+      "knowledge_points": [
+        {
+          "tag": "请求表达",
+          "sub_skill": "reading_comprehension",
+          "prepare_reference": {
+            "level": "Prepare Level 2 (A2)",
+            "unit": "Unit 2 - Making Requests",
+            "section": "2.1 Can you...?",
+            "page": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "ket_r3_t1_q2",
+      "type": "multiple_choice",
+      "question": "When should Lisa arrive at the station?",
+      "context": "Lisa, the train leaves at 3:30. Don't be late! We need to buy tickets first. See you soon. - Mum",
+      "options": ["Before 3:30", "At exactly 3:30", "After 3:30", "The text doesn't say"],
+      "answer": "A",
+      "explanation": "妈妈说 'don't be late'，意思是不要晚于3:30到达。",
+      "difficulty": "easy",
+      "cognitive_type": "understanding",
+      "knowledge_points": [
+        {
+          "tag": "时间表达与提醒",
+          "sub_skill": "reading_comprehension",
+          "prepare_reference": {
+            "level": "Prepare Level 2 (A2)",
+            "unit": "Unit 3 - Time and Dates",
+            "section": "3.1 What time...?",
+            "page": 26
+          }
+        }
+      ]
+    },
+    {
+      "id": "ket_r3_t1_q3",
+      "type": "multiple_choice",
+      "question": "What is the email mainly about?",
+      "context": "Dear Students, Welcome to our summer camp! Please bring warm clothes. The nights are cold here. Also, bring comfortable shoes for walking. Best, Camp Leader",
+      "options": ["A school trip", "A summer holiday", "A sports event", "A music lesson"],
+      "answer": "B",
+      "explanation": "邮件提到 summer camp、warm clothes、nights，说明是夏季露营活动。",
+      "difficulty": "medium",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "邮件主旨理解",
+          "sub_skill": "reading_comprehension",
+          "prepare_reference": {
+            "level": "Prepare Level 2 (A2)",
+            "unit": "Unit 5 - Holidays",
+            "section": "5.1 Summer activities",
+            "page": 46
+          }
+        }
+      ]
+    },
+    {
+      "id": "ket_r3_t1_q4",
+      "type": "multiple_choice",
+      "question": "Why is John writing this note?",
+      "context": "Sorry I missed your party. I was at the hospital with my grandmother. She fell down stairs. She's better now. See you at school. - John",
+      "options": ["To say sorry", "To ask for help", "To give news", "To make plans"],
+      "answer": "C",
+      "explanation": "John 在告知祖母的情况（她在医院，但现在已经好转），是在分享消息。",
+      "difficulty": "medium",
+      "cognitive_type": "analysis",
+      "knowledge_points": [
+        {
+          "tag": "便条目的推断",
+          "sub_skill": "reading_comprehension",
+          "prepare_reference": {
+            "level": "Prepare Level 2 (A2)",
+            "unit": "Unit 7 - Health",
+            "section": "7.2 What happened?",
+            "page": 68
+          }
+        }
+      ]
+    },
+    {
+      "id": "ket_r3_t1_q5",
+      "type": "multiple_choice",
+      "question": "What does Emma want Tom to bring?",
+      "context": "Hi Tom! Are you excited about the picnic tomorrow? Please bring some drinks. I'll bring sandwiches. And don't forget your football! See you at the park. - Emma",
+      "options": ["Food and drinks", "Drinks and a ball", "Sandwiches and drinks", "Food and a ball"],
+      "answer": "B",
+      "explanation": "Emma 说 'please bring some drinks' 和 'don't forget your football'，所以 Tom 需要带饮料和足球。",
+      "difficulty": "medium",
+      "cognitive_type": "application",
+      "knowledge_points": [
+        {
+          "tag": "细节信息提取",
+          "sub_skill": "reading_comprehension",
+          "prepare_reference": {
+            "level": "Prepare Level 2 (A2)",
+            "unit": "Unit 5 - Free Time",
+            "section": "5.2 What are you doing?",
+            "page": 48
+          }
+        }
+      ]
+    }
+  ]
+}

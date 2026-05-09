@@ -1,7 +1,7 @@
 // 测试会话管理模块
 // 支持渠道追踪、完整测试流程
 
-import questionStore from './inMemory';
+import questionStore, { questions } from './inMemory';
 
 // 题目类型
 export type QuestionType = 'multiple_choice' | 'match_notice' | 'fill_blank' | 'reading_comprehension';
@@ -116,27 +116,21 @@ export function createTestSession(params: {
   const count = params.count || 40;
   
   // 从题库获取题目
-  let questions: any[] = [];
+  let selectedQuestions: any[] = [];
   
   if (params.examType) {
-    // 按考试类型获取
-    const sets = questionStore.getExamSets();
-    const targetSets = sets.filter(s => s.exam_type === params.examType);
-    
-    const selectedQuestions: any[] = [];
-    for (const set of targetSets) {
-      const setQuestions = questionStore.getQuestionsBySet(set.set_id);
-      selectedQuestions.push(...setQuestions);
-    }
+    // 按考试类型获取 - 直接从 questions Map 过滤
+    const allQuestions = Array.from(questions.values());
+    const targetQuestions = allQuestions.filter(q => q.exam_type === params.examType);
     
     // 随机选择指定数量
-    questions = shuffleArray(selectedQuestions).slice(0, count);
+    selectedQuestions = shuffleArray(targetQuestions).slice(0, count);
   } else {
     // 获取快速测试题目（混合）
-    questions = questionStore.getQuickTestQuestions(count);
+    selectedQuestions = questionStore.getQuickTestQuestions(count);
   }
   
-  const questionIds = questions.map(q => q.question_id);
+  const questionIds = selectedQuestions.map(q => q.question_id || q.id);
   
   const session: TestSession = {
     sessionId,
@@ -151,7 +145,7 @@ export function createTestSession(params: {
   
   sessions.set(sessionId, session);
   
-  return { session, questions };
+  return { session, questions: selectedQuestions };
 }
 
 // 记录单题答案
@@ -554,3 +548,68 @@ setInterval(() => {
     }
   });
 }, 60 * 60 * 1000);
+
+// 根据手机号获取诊断结果
+export function getStudentDiagnosis(phone: string) {
+  // 查找该学员的所有测试会话
+  const studentSessions: TestSession[] = [];
+  sessions.forEach((session) => {
+    if (session.phone === phone) {
+      studentSessions.push(session);
+    }
+  });
+  
+  if (studentSessions.length === 0) {
+    return {
+      phone,
+      cefrLevel: 'Pre-A1',
+      score: 0,
+      skillScores: {},
+      weakPoints: [],
+      recommendations: ['建议参加水平测试以获取个性化学习建议']
+    };
+  }
+  
+  // 汇总所有会话的答题结果
+  let totalCorrect = 0;
+  let totalQuestions = 0;
+  const skillScores: Record<string, { correct: number; total: number }> = {};
+  
+  for (const session of studentSessions) {
+    for (const answer of Object.values(session.answers as Record<string, any>)) {
+      const skill = (answer as any).skill || 'general';
+      if (!skillScores[skill]) {
+        skillScores[skill] = { correct: 0, total: 0 };
+      }
+      skillScores[skill].total++;
+      totalQuestions++;
+      if ((answer as any).isCorrect) {
+        skillScores[skill].correct++;
+        totalCorrect++;
+      }
+    }
+  }
+  
+  const score = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+  
+  // 计算 CEFR 等级
+  let cefrLevel = 'Pre-A1';
+  if (score >= 90) cefrLevel = 'B2';
+  else if (score >= 80) cefrLevel = 'B1';
+  else if (score >= 70) cefrLevel = 'A2';
+  else if (score >= 60) cefrLevel = 'A1';
+  
+  return {
+    phone,
+    cefrLevel,
+    score,
+    skillScores: Object.fromEntries(
+      Object.entries(skillScores).map(([skill, data]) => [
+        skill,
+        data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0
+      ])
+    ),
+    weakPoints: [],
+    recommendations: []
+  };
+}
