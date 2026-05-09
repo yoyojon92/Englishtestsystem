@@ -49,6 +49,19 @@ export default function RootLayout() {
         <Stack.Screen name="notifications" options={{ title: "消息中心" }} />
         <Stack.Screen name="ai" options={{ title: "AI 能力中心" }} />
         <Stack.Screen name="profile/student" options={{ title: "学员画像" }} />
+        <Stack.Screen name="profile-view" options={{ title: "学员画像" }} />
+        <Stack.Screen name="exam-centers" options={{ title: "考试中心" }} />
+        <Stack.Screen name="contact" options={{ title: "联系我们" }} />
+        <Stack.Screen name="cefr" options={{ title: "CEFR 评估" }} />
+        <Stack.Screen name="prep-plan" options={{ title: "备考计划" }} />
+        <Stack.Screen name="payment/index" options={{ title: "支付" }} />
+        <Stack.Screen name="payment/success" options={{ title: "支付成功" }} />
+        <Stack.Screen name="payment/orders" options={{ title: "我的订单" }} />
+        <Stack.Screen name="teacher" options={{ title: "教师工作台" }} />
+        <Stack.Screen name="teacher/students" options={{ title: "我的学生" }} />
+        <Stack.Screen name="teacher/reports" options={{ title: "课后报告" }} />
+        <Stack.Screen name="teacher/schedule" options={{ title: "课程表" }} />
+        <Stack.Screen name="teacher/stats" options={{ title: "数据看板" }} />
       </Stack>
       <Toast />
     </Provider>
