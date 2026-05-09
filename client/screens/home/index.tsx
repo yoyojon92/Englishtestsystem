@@ -104,10 +104,10 @@ export default function HomeScreen() {
         <View style={styles.quickActions}>
           <TouchableOpacity
             style={styles.actionCard}
-            onPress={() => router.push('/quick-test')}
+            onPress={() => router.push('/test/entry')}
           >
             <LinearGradient
-              colors={['#6C63FF', '#896BFF']}
+              colors={['#4F46E5', '#7C3AED']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
               style={styles.actionGradient}
@@ -115,8 +115,8 @@ export default function HomeScreen() {
               <View style={styles.actionIcon}>
                 <Text style={styles.actionEmoji}>🎯</Text>
               </View>
-              <Text style={styles.actionTitle}>1分钟快测</Text>
-              <Text style={styles.actionDesc}>立即知水平</Text>
+              <Text style={styles.actionTitle}>英语水平测试</Text>
+              <Text style={styles.actionDesc}>15分钟出报告</Text>
             </LinearGradient>
           </TouchableOpacity>
 
@@ -156,6 +156,32 @@ export default function HomeScreen() {
               </View>
               <Text style={styles.actionTitleSecondary}>剑桥考试</Text>
               <Text style={styles.actionDescSecondary}>报名通道</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => router.push('/profile-student')}
+          >
+            <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(34,197,94,0.15)' }]}>
+                <Text style={styles.actionEmoji}>👤</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>我的画像</Text>
+              <Text style={styles.actionDescSecondary}>能力分析</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => router.push('/learning-plan')}
+          >
+            <View style={styles.actionSecondary}>
+              <View style={[styles.actionIcon, { backgroundColor: 'rgba(245,158,11,0.15)' }]}>
+                <Text style={styles.actionEmoji}>📋</Text>
+              </View>
+              <Text style={styles.actionTitleSecondary}>学习计划</Text>
+              <Text style={styles.actionDescSecondary}>月度规划</Text>
             </View>
           </TouchableOpacity>
 

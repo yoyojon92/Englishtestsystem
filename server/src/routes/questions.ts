@@ -2,9 +2,15 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 // TODO: 生产环境替换为 PostgreSQL
 // import { query } from '../db';
-import { questionStore, type Question } from '../db/inMemory';
+import { questionStore, questions, type Question } from '../db/inMemory';
 
 const router = Router();
+
+// Debug: log questions size on each request
+router.use((req, res, next) => {
+  console.log(`[DEBUG] questions router: ${req.method} ${req.url}`);
+  next();
+});
 
 /**
  * Get all exam sets
@@ -87,6 +93,40 @@ router.get('/detail/:id', async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error fetching question:', error);
     res.status(500).json({ error: 'Failed to fetch question' });
+  }
+});
+
+/**
+ * Get quick test questions (for 1-minute assessment)
+ * GET /api/v1/questions/quick-test
+ * NOTE: This route must be defined BEFORE /:examType/:part to avoid being matched as examType="quick-test"
+ */
+router.get('/quick-test', async (req: Request, res: Response) => {
+  try {
+    const count = parseInt(req.query.count as string) || 5;
+    const allQuestions = questionStore.getQuickTestQuestions(count);
+    
+    const result = allQuestions.map((q) => ({
+      question_id: q.question_id,
+      question_type: q.question_type,
+      question_text: q.question_text,
+      skill: q.skill,
+      difficulty: q.difficulty,
+      options: [], // 选项从 notices 获取
+      notices: questionStore.getNotices(q.question_id),
+      knowledge_points: questionStore.getKnowledgePoints(q.question_id),
+      correct_answer: q.correct_answer,
+      explanation: q.explanation
+    }));
+    
+    res.json({
+      success: true,
+      data: result,
+      total: result.length
+    });
+  } catch (error) {
+    console.error('Error getting quick test:', error);
+    res.status(500).json({ error: 'Failed to get quick test' });
   }
 });
 

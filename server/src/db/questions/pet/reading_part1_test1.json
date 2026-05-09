@@ -1,0 +1,132 @@
+{
+  "exam": "PET Reading Part 1",
+  "exam_type": "PET",
+  "level": "B1",
+  "test_number": 1,
+  "skill": "reading",
+  "part": 1,
+  "instruction": "Read the notices, messages and articles. Choose the correct answer.",
+  "total_questions": 6,
+  "notices": [
+    { "id": "A", "text": "NOTICE: The swimming pool will be closed for cleaning on Monday 23rd March. It will reopen on Tuesday 24th at 6am. We apologise for any inconvenience." },
+    { "id": "B", "text": "TOUR GUIDE WANTED: Do you know your city well? Are you good with people? We need a tour guide for summer season. Call 555-1234 for details." },
+    { "id": "C", "text": "FREE CONCERT: Join us at Central Park this Saturday at 7pm for an evening of classical music. All welcome, no booking required!" },
+    { "id": "D", "text": "LOST: Black leather wallet somewhere between the bus stop and the library on Tuesday morning. If found, please call 555-5678." }
+  ],
+  "questions": [
+    {
+      "id": "pet_reading_p1_t1_q001",
+      "question_number": 1,
+      "type": "multiple_choice_notice",
+      "question": "What do we learn about the swimming pool?",
+      "answer": "B",
+      "explanation": "游泳池因清洁将关闭一天，星期二早上6点重开。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "通知理解", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 3", "unit": "Unit 1", "section": "1.1", "page": 8 } }
+      ],
+      "options": [
+        "A) It's open every day",
+        "B) It's closed for one day",
+        "C) It's moving to a new location",
+        "D) It's getting bigger"
+      ]
+    },
+    {
+      "id": "pet_reading_p1_t1_q002",
+      "question_number": 2,
+      "type": "multiple_choice_notice",
+      "question": "What must you do if you want the tour guide job?",
+      "answer": "C",
+      "explanation": "需要打电话555-1234了解更多详情才能申请。",
+      "difficulty": "medium",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "招聘信息理解", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 3", "unit": "Unit 5", "section": "5.2", "page": 48 } }
+      ],
+      "options": [
+        "A) Send an email",
+        "B) Visit the office",
+        "C) Telephone for information",
+        "D) Write a letter"
+      ]
+    },
+    {
+      "id": "pet_reading_p1_t1_q003",
+      "question_number": 3,
+      "type": "multiple_choice_notice",
+      "question": "What is special about the concert?",
+      "answer": "A",
+      "explanation": "音乐会是免费的，不需要提前预约。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "活动信息提取", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 3", "unit": "Unit 10", "section": "10.1", "page": 94 } }
+      ],
+      "options": [
+        "A) It's free and no booking needed",
+        "B) It's only for classical music fans",
+        "C) It will be inside a concert hall",
+        "D) You need to pay at the door"
+      ]
+    },
+    {
+      "id": "pet_reading_p1_t1_q004",
+      "question_number": 4,
+      "type": "multiple_choice_notice",
+      "question": "Where was the wallet probably lost?",
+      "answer": "D",
+      "explanation": "钱包遗失地点在公交站和图书馆之间的某个地方。",
+      "difficulty": "medium",
+      "cognitive_type": "分析",
+      "knowledge_points": [
+        { "tag": "地点信息理解", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 3", "unit": "Unit 6", "section": "6.1", "page": 56 } }
+      ],
+      "options": [
+        "A) On a bus",
+        "B) At the bus stop",
+        "C) In the library",
+        "D) Between the bus stop and library"
+      ]
+    },
+    {
+      "id": "pet_reading_p1_t1_q005",
+      "question_number": 5,
+      "type": "multiple_choice_notice",
+      "question": "What is the main purpose of this notice?",
+      "answer": "B",
+      "explanation": "这是一个失物招领启事，寻求帮助找回钱包。",
+      "difficulty": "medium",
+      "cognitive_type": "分析",
+      "knowledge_points": [
+        { "tag": "启事目的理解", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 3", "unit": "Unit 5", "section": "5.1", "page": 46 } }
+      ],
+      "options": [
+        "A) To warn people about theft",
+        "B) To ask people to help find something",
+        "C) To describe a wallet",
+        "D) To criticize someone"
+      ]
+    },
+    {
+      "id": "pet_reading_p1_t1_q006",
+      "question_number": 6,
+      "type": "multiple_choice_notice",
+      "question": "When does the lost wallet notice expect a reply?",
+      "answer": "A",
+      "explanation": "启事要求如有发现请打电话，说明希望尽快收到回复。",
+      "difficulty": "hard",
+      "cognitive_type": "推断",
+      "knowledge_points": [
+        { "tag": "隐含信息推断", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 3", "unit": "Unit 7", "section": "7.2", "page": 68 } }
+      ],
+      "options": [
+        "A) As soon as possible",
+        "B) Within a week",
+        "C) By Tuesday",
+        "D) Whenever convenient"
+      ]
+    }
+  ]
+}

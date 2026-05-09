@@ -1,0 +1,107 @@
+{
+  "exam": "KET Reading Part 2",
+  "exam_type": "KET",
+  "level": "A2",
+  "test_number": 1,
+  "skill": "reading",
+  "part": 2,
+  "instruction": "Read the messages and choose the best answer.",
+  "total_questions": 5,
+  "questions": [
+    {
+      "id": "ket_reading_p2_t1_q001",
+      "question_number": 6,
+      "type": "match_message",
+      "question": "What does Emma want Tom to do?",
+      "answer": "C",
+      "explanation": "Emma想让Tom在回家的路上买些东西。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "日常交流用语", "sub_skill": "reading_comprehension", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 1", "section": "1.1", "page": 8 } }
+      ],
+      "options": [
+        "A) Meet her at the shop",
+        "B) Call her back",
+        "C) Buy something on his way home",
+        "D) Come to her house later"
+      ]
+    },
+    {
+      "id": "ket_reading_p2_t1_q002",
+      "question_number": 7,
+      "type": "match_message",
+      "question": "When will the movie start?",
+      "answer": "B",
+      "explanation": "电影将在晚上7点开始。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "时间表达", "sub_skill": "vocabulary", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 2", "section": "2.2", "page": 18 } }
+      ],
+      "options": [
+        "A) 6:00 PM",
+        "B) 7:00 PM",
+        "C) 8:00 PM",
+        "D) 9:00 PM"
+      ]
+    },
+    {
+      "id": "ket_reading_p2_t1_q003",
+      "question_number": 8,
+      "type": "match_message",
+      "question": "Where did Sarah leave her bag?",
+      "answer": "A",
+      "explanation": "Sarah把包落在了咖啡馆。",
+      "difficulty": "medium",
+      "cognitive_type": "分析",
+      "knowledge_points": [
+        { "tag": "地点介词使用", "sub_skill": "grammar", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 6", "section": "6.1", "page": 52 } }
+      ],
+      "options": [
+        "A) At the cafe",
+        "B) At the school",
+        "C) At home",
+        "D) In the car"
+      ]
+    },
+    {
+      "id": "ket_reading_p2_t1_q004",
+      "question_number": 9,
+      "type": "match_message",
+      "question": "What is the weather like today?",
+      "answer": "D",
+      "explanation": "今天天气下雨且冷。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "天气相关词汇", "sub_skill": "vocabulary", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 7", "section": "7.2", "page": 64 } }
+      ],
+      "options": [
+        "A) Sunny and hot",
+        "B) Windy but warm",
+        "C) Cloudy",
+        "D) Rainy and cold"
+      ]
+    },
+    {
+      "id": "ket_reading_p2_t1_q005",
+      "question_number": 10,
+      "type": "match_message",
+      "question": "What does the teacher want students to bring?",
+      "answer": "C",
+      "explanation": "老师要求学生明天带一张照片。",
+      "difficulty": "medium",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "祈使句用法", "sub_skill": "grammar", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 3", "section": "3.1", "page": 26 } }
+      ],
+      "options": [
+        "A) A pen",
+        "B) A book",
+        "C) A photo",
+        "D) A map"
+      ]
+    }
+  ]
+}

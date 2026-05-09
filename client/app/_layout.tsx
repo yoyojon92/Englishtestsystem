@@ -65,6 +65,10 @@ export default function RootLayout() {
         <Stack.Screen name="ket-practice" options={{ title: "KET 练习" }} />
         <Stack.Screen name="learning-plan" options={{ title: "学习计划" }} />
         <Stack.Screen name="quick-test" options={{ title: "快速测试" }} />
+        <Stack.Screen name="profile-student" options={{ title: "学员画像" }} />
+        <Stack.Screen name="test/entry" options={{ title: "英语水平测试" }} />
+        <Stack.Screen name="test/playing" options={{ title: "答题中", headerShown: false }} />
+        <Stack.Screen name="test/report" options={{ title: "测试报告", headerShown: false }} />
       </Stack>
       <Toast />
     </Provider>

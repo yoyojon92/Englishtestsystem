@@ -70,6 +70,11 @@ export const questionStore = {
     questions.set(question.id, question);
   },
 
+  // 获取单个题目
+  getQuestion(id: string): Question | undefined {
+    return questions.get(id);
+  },
+
   // 获取所有题目
   getAllQuestions(): Question[] {
     return Array.from(questions.values());
@@ -97,6 +102,17 @@ export const questionStore = {
   // 获取题目的知识点
   getKnowledgePoints(questionId: string): KnowledgePoint[] {
     return knowledgePoints.get(questionId) || [];
+  },
+
+  // 获取快速测试题目（随机抽取指定数量）
+  getQuickTestQuestions(count: number = 5): Question[] {
+    const allQuestions = Array.from(questions.values());
+    // 随机打乱
+    for (let i = allQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+    }
+    return allQuestions.slice(0, Math.min(count, allQuestions.length));
   },
 
   // 添加单个知识点

@@ -1,0 +1,87 @@
+{
+  "exam": "KET Reading Part 1",
+  "exam_type": "KET",
+  "level": "A2",
+  "test_number": 1,
+  "skill": "reading",
+  "part": 1,
+  "instruction": "Which notice (A-H) says this (1-5)?",
+  "total_questions": 5,
+  "notices": [
+    { "id": "A", "text": "SUMMER SALE LOW PRICES IN ALL DEPARTMENTS" },
+    { "id": "B", "text": "FIRE DOOR KEEP CLOSED" },
+    { "id": "C", "text": "LIFT NOT WORKING" },
+    { "id": "D", "text": "TOY SHOP NOW OPEN" },
+    { "id": "E", "text": "BUY NOW PAY NEXT YEAR!" },
+    { "id": "F", "text": "Keep this nightdress away from fire!" },
+    { "id": "G", "text": "We do not take cheques or credit cards." },
+    { "id": "H", "text": "Under 12s HALF PRICE" }
+  ],
+  "questions": [
+    {
+      "id": "ket_reading_p1_t1_q001",
+      "question_number": 1,
+      "type": "match_notice",
+      "question": "Children pay less than adults here.",
+      "answer": "H",
+      "explanation": "H说'Under 12s HALF PRICE'，12岁以下半价，即儿童付更少。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "价格与优惠表达", "sub_skill": "vocabulary", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 4", "section": "4.2", "page": 38 } }
+      ]
+    },
+    {
+      "id": "ket_reading_p1_t1_q002",
+      "question_number": 2,
+      "type": "match_notice",
+      "question": "Be careful because this will burn.",
+      "answer": "F",
+      "explanation": "F说'Keep this nightdress away from fire!'，提醒睡衣远离火源。",
+      "difficulty": "medium",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "安全警告标识", "sub_skill": "vocabulary", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 7", "section": "7.1", "page": 62 } }
+      ]
+    },
+    {
+      "id": "ket_reading_p1_t1_q003",
+      "question_number": 3,
+      "type": "match_notice",
+      "question": "We don't want any money yet.",
+      "answer": "E",
+      "explanation": "E说'BUY NOW PAY NEXT YEAR!'，现在买明年付，暂时不收钱。",
+      "difficulty": "medium",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "付款方式与时间表达", "sub_skill": "grammar", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 4", "section": "4.3", "page": 40 } }
+      ]
+    },
+    {
+      "id": "ket_reading_p1_t1_q004",
+      "question_number": 4,
+      "type": "match_notice",
+      "question": "Things are cheaper here.",
+      "answer": "A",
+      "explanation": "A说'SUMMER SALE LOW PRICES'，夏季促销低价。",
+      "difficulty": "easy",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "促销广告用语", "sub_skill": "vocabulary", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 4", "section": "4.1", "page": 36 } }
+      ]
+    },
+    {
+      "id": "ket_reading_p1_t1_q005",
+      "question_number": 5,
+      "type": "match_notice",
+      "question": "You must pay with cash.",
+      "answer": "G",
+      "explanation": "G说'We do not take cheques or credit cards'，不收支票和信用卡，即必须现金。",
+      "difficulty": "medium",
+      "cognitive_type": "理解",
+      "knowledge_points": [
+        { "tag": "支付方式表达", "sub_skill": "vocabulary", "prepare_reference": { "level": "Prepare Level 2", "unit": "Unit 4", "section": "4.3", "page": 40 } }
+      ]
+    }
+  ]
+}

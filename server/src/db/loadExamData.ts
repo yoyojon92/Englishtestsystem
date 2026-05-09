@@ -5,7 +5,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { questionStore, type Question, type Notice, type KnowledgePoint } from './inMemory.js';
+import { questions, questionNotices, knowledgePoints, prepareReferences } from './inMemory.js';
 
 interface ExamQuestion {
   id: string;
@@ -99,25 +99,26 @@ export function loadExamFromFile(jsonPath: string): number {
         };
 
         // 添加到 store
-        questionStore.addQuestion(question);
+        questions.set(question.id, question);
 
         // 处理 notices（每道题关联的 notices）
         if (q.notices && Array.isArray(q.notices)) {
-          const qNotices: Notice[] = q.notices.map((n: any) => ({
+          const qNotices: any[] = q.notices.map((n: any) => ({
             id: `${questionId}_${n.id}`,
             question_id: questionId,
             notice_id: n.id,
             text: n.text,
             image: n.image
           }));
-          questionStore.addNotices(questionId, qNotices);
+          questionNotices.set(questionId, qNotices);
         } else if (sharedNotices.length > 0) {
           // 对于 match_notice 类型题，关联所有共享 notices
-          questionStore.addNotices(questionId, sharedNotices);
+          questionNotices.set(questionId, sharedNotices);
         }
 
         // 处理知识点
         if (q.knowledge_points && Array.isArray(q.knowledge_points)) {
+          const kps: KnowledgePoint[] = [];
           for (const kp of q.knowledge_points) {
             const kpRecord: KnowledgePoint = {
               id: `kp-${questionId}-${count}`,
@@ -128,8 +129,9 @@ export function loadExamFromFile(jsonPath: string): number {
               prepare_section: kp.prepare_reference?.section || '',
               prepare_page: kp.prepare_reference?.page || undefined
             };
-            questionStore.addKnowledgePoint(questionId, kpRecord);
+            kps.push(kpRecord);
           }
+          knowledgePoints.set(questionId, kps);
         }
 
         count++;
@@ -152,7 +154,9 @@ export function loadExamsFromDirectory(dirPath: string): number {
   }
 
   const files = fs.readdirSync(dirPath);
+  console.log(`Scanning directory: ${dirPath} (${files.length} files)`);
   for (const file of files) {
+    console.log(`  Found file: ${file}`);
     if (file.endsWith('.json')) {
       const filePath = path.join(dirPath, file);
       total += loadExamFromFile(filePath);
