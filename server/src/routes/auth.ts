@@ -1,7 +1,6 @@
-import express from 'express';
+import express, { Router, type Request, type Response } from 'express';
 import { users, generateId } from '../models/index.js';
 
-const { Router, Request, Response } = express;
 const router = Router();
 
 // Register

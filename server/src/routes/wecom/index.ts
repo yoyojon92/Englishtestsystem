@@ -616,6 +616,7 @@ router.post('/report/send', async (req: any, res: any) => {
     parentUserId: student.parentUserId,
     type: 'report',
     content: reportContent,
+    isRead: false,
     createdAt: new Date().toISOString(),
   };
   messages.set(message.id, message);
@@ -695,7 +696,7 @@ router.post('/post-class-reports', (req: any, res: any) => {
     classDate: classDate || new Date().toISOString(),
     content: content || { summary: '', performance: '', homework: '', suggestions: '' },
     aiScores: aiScores || { overall: 0, vocabulary: 0, grammar: 0, pronunciation: 0, fluency: 0, interaction: 0 },
-    status: 'pending_review',
+    status: 'pending_review' as const,
     pushedToParent: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),

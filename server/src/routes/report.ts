@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { type Response } from 'express';
 import { assessmentReports, assessments, courses, enrollments, generateId } from '../models/index.js';
 import { authMiddleware } from '../middleware/auth.js';
 
@@ -7,8 +7,7 @@ interface AuthRequest extends Record<string, any> {
   userRole?: string;
 }
 
-const { Router, Response } = express;
-const router = Router();
+const router = express.Router();
 
 // Get all assessment reports for user
 router.get('/', authMiddleware, (req: AuthRequest, res: Response) => {
@@ -194,10 +193,10 @@ router.get('/:id/skills', authMiddleware, (req: AuthRequest, res: Response) => {
       }
     ];
     
-    res.json({ skills });
+    res.json({ success: true, data: skills });
   } catch (error) {
     console.error('Get skills error:', error);
-    res.status(500).json({ error: 'Failed to get skills' });
+    res.status(500).json({ success: false, error: 'Failed to get skills' });
   }
 });
 

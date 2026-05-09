@@ -15,6 +15,9 @@ import freeCourseRoutes from './routes/free-course/index.js';
 import wecomRoutes from './routes/wecom/index.js';
 import studentProfileRoutes from './routes/student-profile/index.js';
 import paymentRoutes from './routes/payment.js';
+import mockExamRoutes from './routes/mock-exam.js';
+import prepPlanRoutes from './routes/prep-plan.js';
+import cefrRoutes from './routes/cefr.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -41,6 +44,9 @@ app.use('/api/v1/free-courses', freeCourseRoutes);
 app.use('/api/v1/wecom', wecomRoutes);
 app.use('/api/v1/student-profile', studentProfileRoutes);
 app.use('/api/v1/payment', paymentRoutes);
+app.use('/api/v1/mock-exam', mockExamRoutes);
+app.use('/api/v1/prep-plan', prepPlanRoutes);
+app.use('/api/v1/cefr', cefrRoutes);
 
 // Health check
 app.get('/api/v1/health', (req, res) => {
@@ -48,7 +54,7 @@ app.get('/api/v1/health', (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error:', err);
   res.status(500).json({ error: 'Internal server error' });
 });

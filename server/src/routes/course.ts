@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Router, type Response } from 'express';
 import { courses, enrollments, generateId } from '../models/index.js';
 import { authMiddleware, optionalAuth } from '../middleware/auth.js';
 
@@ -7,7 +7,6 @@ interface AuthRequest extends Record<string, any> {
   userRole?: string;
 }
 
-const { Router, Response } = express;
 const router = Router();
 
 // Sample courses data

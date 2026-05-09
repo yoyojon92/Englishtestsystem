@@ -38,7 +38,7 @@ export async function getAccessToken(): Promise<string> {
       return data.access_token;
     }
     
-    throw new Error(data.errmsg || 'Failed to get access token');
+    throw new Error((data as any).errmsg || 'Failed to get access token');
   } catch (error) {
     console.error('Failed to get access token:', error);
     throw error;
@@ -112,7 +112,7 @@ export async function getUserInfo(code: string): Promise<{
   const url = `${WECOM_CONFIG.apiBaseUrl}/user/getuserinfo?access_token=${token}&code=${code}`;
   
   const response = await fetch(url);
-  return await response.json();
+  return await response.json() as { errcode?: number; errmsg?: string; UserId?: string; OpenId?: string; name?: string; avatar?: string };
 }
 
 /**
@@ -132,7 +132,7 @@ export async function getUserDetail(userId: string): Promise<{
   const url = `${WECOM_CONFIG.apiBaseUrl}/user/get?access_token=${token}&userid=${userId}`;
   
   const response = await fetch(url);
-  return await response.json();
+  return await response.json() as { errcode?: number; errmsg?: string; userid?: string; name?: string; avatar?: string; mobile?: string; department?: number[]; position?: string };
 }
 
 /**

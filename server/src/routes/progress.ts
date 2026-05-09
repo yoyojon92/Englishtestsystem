@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { type Response } from 'express';
 import { learningProgress, enrollments, courses, generateId } from '../models/index.js';
 import { authMiddleware } from '../middleware/auth.js';
 
@@ -7,8 +7,7 @@ interface AuthRequest extends Record<string, any> {
   userRole?: string;
 }
 
-const { Router, Response } = express;
-const router = Router();
+const router = express.Router();
 
 // Get learning progress for an enrollment
 router.get('/enrollment/:enrollmentId', authMiddleware, (req: AuthRequest, res: Response) => {

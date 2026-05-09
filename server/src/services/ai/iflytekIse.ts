@@ -21,21 +21,25 @@ const IFLYTEK_CONFIG = {
 };
 
 // 评测类型
-export enum IseType {
-  CHINESE = 'cn',      // 中文
-  ENGLISH = 'en',      // 英文
-  SENTENCE = 5,        // 句子评测
-  WORD = 4,            // 单词评测
-  CHAPTER = 1,         // 篇章评测
-}
+export const IseType = {
+  CHINESE: 'cn',      // 中文
+  ENGLISH: 'en',      // 英文
+  SENTENCE: 5,        // 句子评测
+  WORD: 4,            // 单词评测
+  CHAPTER: 1,         // 篇章评测
+} as const;
+
+export type IseType = typeof IseType[keyof typeof IseType];
 
 // 评测级别
-export enum IseGrade {
-  READ_SYLLABLE = 'lattice',        // 幼儿
-  READ_WORD = 'word',               // 单词
-  READ_SENTENCE = 'sentence',       // 句子
-  READ_CHAPTER = 'chapter',          // 篇章
-}
+export const IseGrade = {
+  READ_SYLLABLE: 'lattice',        // 幼儿
+  READ_WORD: 'word',               // 单词
+  READ_SENTENCE: 'sentence',       // 句子
+  READ_CHAPTER: 'chapter',          // 篇章
+} as const;
+
+export type IseGrade = typeof IseGrade[keyof typeof IseGrade];
 
 // 评分维度
 export interface IseScore {
@@ -157,7 +161,7 @@ export async function evaluateSpeech(params: {
       body: JSON.stringify(body),
     });
     
-    const result = await response.json();
+    const result: any = await response.json();
     
     if (result.code === '0') {
       return {

@@ -28,10 +28,10 @@ router.get('/lessons', (req, res) => {
   
   let filtered = [...lessons];
   
-  if (category) {
+  if (category && typeof category === 'string') {
     filtered = filtered.filter(l => l.id.startsWith(category));
   }
-  if (level) {
+  if (level && typeof level === 'string') {
     filtered = filtered.filter(l => l.id.startsWith(level));
   }
   
@@ -122,7 +122,7 @@ router.get('/quizzes', (req, res) => {
   const { level } = req.query;
   
   let filtered = [...quizzes];
-  if (level) {
+  if (level && typeof level === 'string') {
     filtered = filtered.filter(q => q.id.startsWith(level));
   }
   
@@ -147,11 +147,11 @@ router.post('/quizzes/:id/submit', (req, res) => {
     return res.status(404).json({ success: false, error: '测验不存在' });
   }
   
-  let progress = userProgress.get(userId) || {
+  let progress: UserProgress = userProgress.get(userId) || {
     userId,
-    completedLessons: [],
-    completedQuizzes: [],
-    earnedBadges: [],
+    completedLessons: [] as string[],
+    completedQuizzes: [] as string[],
+    earnedBadges: [] as string[],
     streakDays: 0,
     lastStudyDate: '',
     totalPoints: 0,
@@ -271,11 +271,11 @@ router.post('/lessons/:id/complete', (req, res) => {
     return res.status(404).json({ success: false, error: '课程不存在' });
   }
   
-  let progress = userProgress.get(userId) || {
+  let progress: UserProgress = userProgress.get(userId) || {
     userId,
-    completedLessons: [],
-    completedQuizzes: [],
-    earnedBadges: [],
+    completedLessons: [] as string[],
+    completedQuizzes: [] as string[],
+    earnedBadges: [] as string[],
     streakDays: 0,
     lastStudyDate: '',
     totalPoints: 0,

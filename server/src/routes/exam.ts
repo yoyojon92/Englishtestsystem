@@ -551,7 +551,7 @@ router.get('/', (req: Request, res: Response) => {
  * Query: city, examType, status
  */
 router.get('/:examId/sessions', (req: Request, res: Response) => {
-  const { examId } = req.params;
+  const examId = req.params.examId as string;
   const { city, examType, status } = req.query;
   
   let sessions = Array.from(examSessions.values()).filter(s => s.examId === examId);
@@ -592,7 +592,7 @@ router.get('/sessions/cities', (req: Request, res: Response) => {
  * GET /api/v1/exams/sessions/:sessionId
  */
 router.get('/sessions/:sessionId', (req: Request, res: Response) => {
-  const { sessionId } = req.params;
+  const sessionId = req.params.sessionId as string;
   const session = examSessions.get(sessionId);
   
   if (!session) {
@@ -724,7 +724,7 @@ router.get('/registrations/list', (req: Request, res: Response) => {
  * GET /api/v1/exams/registrations/:registrationId
  */
 router.get('/registrations/:registrationId', (req: Request, res: Response) => {
-  const { registrationId } = req.params;
+  const registrationId = req.params.registrationId as string;
   const registration = examRegistrations.get(registrationId);
   
   if (!registration) {
@@ -752,7 +752,7 @@ router.get('/registrations/:registrationId', (req: Request, res: Response) => {
  * POST /api/v1/exams/registrations/:registrationId/confirm
  */
 router.post('/registrations/:registrationId/confirm', (req: Request, res: Response) => {
-  const { registrationId } = req.params;
+  const registrationId = req.params.registrationId as string;
   const registration = examRegistrations.get(registrationId);
   
   if (!registration) {
@@ -1023,7 +1023,7 @@ router.get('/mock/history', (req: Request, res: Response) => {
  * GET /api/v1/exams/mock/:examId
  */
 router.get('/mock/:examId', (req: Request, res: Response) => {
-  const { examId } = req.params;
+  const examId = req.params.examId as string;
   const exam = mockExams.get(examId);
   
   if (!exam) {
@@ -1148,7 +1148,7 @@ router.get('/plans/list', (req: Request, res: Response) => {
  * PUT /api/v1/exams/plans/:planId
  */
 router.put('/plans/:planId', (req: Request, res: Response) => {
-  const { planId } = req.params;
+  const planId = req.params.planId as string;
   const { progressPct, completedWeeks } = req.body;
   
   const plan = examPrepPlans.get(planId);
@@ -1347,7 +1347,7 @@ router.get('/crash-courses/orders', (req: Request, res: Response) => {
  * GET /api/v1/exams/:examId
  */
 router.get('/:examId', (req: Request, res: Response) => {
-  const { examId } = req.params;
+  const examId = req.params.examId as string;
   const catalog = examCatalogs.get(examId);
   
   if (!catalog) {

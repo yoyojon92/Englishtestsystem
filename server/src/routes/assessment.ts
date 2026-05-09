@@ -1,8 +1,12 @@
 import { assessments, assessmentQuestions, assessmentReports, generateId } from '../models/index.js';
 import { authMiddleware } from '../middleware/auth.js';
-import express from 'express';
+import express, { Router, type Response } from 'express';
 
-const { Router, Response } = express;
+interface AuthRequest extends Record<string, any> {
+  userId?: string;
+  userRole?: string;
+}
+
 const router = Router();
 
 // Sample assessment questions by Cambridge level

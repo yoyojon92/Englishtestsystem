@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { type Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { query } from '../db';
 import { wechatPayService } from '../services/payment/wechatPay';
@@ -107,18 +107,22 @@ router.post('/create', verifyToken, async (req: AuthRequest, res) => {
  * POST /api/v1/payment/notify
  * 微信支付回调通知
  */
-router.post('/notify', async (req, res) => {
+router.post('/notify', async (req, res: Response) => {
   try {
     const params = req.body;
+    const sendXml = (xml: string) => {
+      res.set('Content-Type', 'text/xml');
+      return res.send(xml);
+    };
 
     if (params.return_code !== 'SUCCESS') {
-      return res.xml('<xml><return_code><![CDATA[FAIL]]></return_code></xml>');
+      return sendXml('<xml><return_code><![CDATA[FAIL]]></return_code></xml>');
     }
 
     // 验证签名
     if (!wechatPayService.verifyCallback(params)) {
       console.error('Invalid payment callback signature');
-      return res.xml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名验证失败]]></return_msg></xml>');
+      return sendXml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[签名验证失败]]></return_msg></xml>');
     }
 
     const { out_trade_no, transaction_id, total_fee, cash_fee } = params;
@@ -130,21 +134,21 @@ router.post('/notify', async (req, res) => {
     );
 
     if (orderResult.rows.length === 0) {
-      return res.xml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[订单不存在]]></return_msg></xml>');
+      return sendXml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[订单不存在]]></return_msg></xml>');
     }
 
     const order = orderResult.rows[0];
 
     // 检查订单状态
     if (order.status === 'paid') {
-      return res.xml('<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>');
+      return sendXml('<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>');
     }
 
     // 检查金额
     const paidAmount = parseInt(total_fee) / 100;
     if (paidAmount !== parseFloat(order.actual_amount)) {
       console.error('Amount mismatch:', { expected: order.actual_amount, actual: paidAmount });
-      return res.xml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[金额不匹配]]></return_msg></xml>');
+      return sendXml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[金额不匹配]]></return_msg></xml>');
     }
 
     // 更新订单状态
@@ -158,10 +162,10 @@ router.post('/notify', async (req, res) => {
     // 根据订单类型处理后续业务
     await handleOrderPaid(order);
 
-    return res.xml('<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>');
+    return sendXml('<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>');
   } catch (error) {
     console.error('Payment notify error:', error);
-    return res.xml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[系统错误]]></return_msg></xml>');
+    return (res as any).sendXml('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[系统错误]]></return_msg></xml>');
   }
 });
 

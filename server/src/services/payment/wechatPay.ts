@@ -50,11 +50,11 @@ class WechatPayService {
   /**
    * 生成签名
    */
-  private generateSign(params: Record<string, string>): string {
+  private generateSign(params: Record<string, string | number>): string {
     const signType = 'MD5';
     const sortedKeys = Object.keys(params).sort();
     const signStr = sortedKeys
-      .filter(key => key !== 'sign' && params[key])
+      .filter(key => key !== 'sign' && params[key] !== undefined && params[key] !== null)
       .map(key => `${key}=${params[key]}`)
       .join('&') + `&key=${this.config.apiKey}`;
 

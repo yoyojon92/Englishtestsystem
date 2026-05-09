@@ -20,7 +20,7 @@ const LLM_CONFIG = {
 };
 
 // 会话状态
-interface ConversationSession {
+export interface ConversationSession {
   sessionId: string;
   childId: string;
   type: 'post_class' | 'exam_practice' | 'free_conversation';
@@ -267,7 +267,7 @@ async function callLLM(messages: Message[]): Promise<string> {
       throw new Error(`LLM API error: ${response.status}`);
     }
     
-    const data = await response.json();
+    const data: any = await response.json();
     return data.choices?.[0]?.message?.content || '';
   } catch (error) {
     console.error('LLM call failed:', error);
