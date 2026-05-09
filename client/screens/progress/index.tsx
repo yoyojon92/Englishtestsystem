@@ -293,6 +293,15 @@ export default function ProgressScreen() {
               
               <TouchableOpacity
                 style={styles.toolCard}
+                onPress={() => router.push('/profile/student')}
+              >
+                <Text style={styles.toolEmoji}>🧒</Text>
+                <Text style={styles.toolTitle}>学员画像</Text>
+                <Text style={styles.toolDesc}>能力雷达图</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                style={styles.toolCard}
                 onPress={() => router.push('/reports')}
               >
                 <Text style={styles.toolEmoji}>📊</Text>

@@ -48,6 +48,7 @@ export default function RootLayout() {
         <Stack.Screen name="achievements" options={{ title: "我的成就" }} />
         <Stack.Screen name="notifications" options={{ title: "消息中心" }} />
         <Stack.Screen name="ai" options={{ title: "AI 能力中心" }} />
+        <Stack.Screen name="profile/student" options={{ title: "学员画像" }} />
       </Stack>
       <Toast />
     </Provider>

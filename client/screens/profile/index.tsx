@@ -39,6 +39,7 @@ export default function ProfileScreen() {
 
   const menuItems = [
     { icon: '🔔', title: '消息通知', subtitle: '查看全部消息', route: '/notifications', badge: 2 },
+    { icon: '🧒', title: '学员画像', subtitle: '能力雷达图', route: '/profile/student' },
     { icon: '📚', title: '我的课程', subtitle: '查看已购课程', route: '/progress' },
     { icon: '🎓', title: '免费课程', subtitle: '学习更多内容', route: '/free-courses' },
     { icon: '🏆', title: '我的成就', subtitle: '学习徽章', route: '/achievements' },
