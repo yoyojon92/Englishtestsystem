@@ -1,0 +1,55 @@
+{
+  "exam": "KET Listening Part 1",
+  "exam_type": "KET",
+  "level": "A2",
+  "skill": "Listening",
+  "part": 4,
+  "instruction": "Listen to five short texts. Choose the correct answer A, B or C.",
+  "questions": [
+    {
+      "id": "listening_p1_q1",
+      "type": "multiple_choice",
+      "question": "Where did the woman go on Saturday?",
+      "options": ["To the cinema", "To the supermarket", "To the park"],
+      "answer": "A",
+      "difficulty": "easy",
+      "explanation": "The woman says she went to see a film on Saturday afternoon."
+    },
+    {
+      "id": "listening_p1_q2",
+      "type": "multiple_choice",
+      "question": "What time does the train leave?",
+      "options": ["8:30", "8:45", "9:00"],
+      "answer": "B",
+      "difficulty": "easy",
+      "explanation": "The speaker mentions the train departs at twenty to nine, which is 8:40 or 8:45."
+    },
+    {
+      "id": "listening_p1_q3",
+      "type": "multiple_choice",
+      "question": "What is the weather like today?",
+      "options": ["Sunny", "Rainy", "Cloudy"],
+      "answer": "C",
+      "difficulty": "easy",
+      "explanation": "The weather forecast mentions clouds throughout the day."
+    },
+    {
+      "id": "listening_p1_q4",
+      "type": "multiple_choice",
+      "question": "How much is the book?",
+      "options": ["£5", "£10", "£15"],
+      "answer": "C",
+      "difficulty": "medium",
+      "explanation": "The price reduced from £20 to £15 after the discount."
+    },
+    {
+      "id": "listening_p1_q5",
+      "type": "multiple_choice",
+      "question": "Where is the bank?",
+      "options": ["Next to the cafe", "Across from the park", "Near the station"],
+      "answer": "A",
+      "difficulty": "medium",
+      "explanation": "The speaker says the bank is in the same building as the cafe."
+    }
+  ]
+}

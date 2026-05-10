@@ -1,0 +1,37 @@
+{
+  "exam": "KET Writing Part 1",
+  "exam_type": "KET",
+  "level": "A2",
+  "skill": "Writing",
+  "part": 7,
+  "instruction": "Write a message of 25 words or more.",
+  "questions": [
+    {
+      "id": "writing_p1_q1",
+      "type": "fill_blank",
+      "question": "Write a message to your friend about going to the cinema tonight. Include: what film, what time, where to meet.",
+      "options": [],
+      "answer": "Hi! Do you want to go to the cinema tonight? There's a new action film at 7pm. Let's meet at the entrance at 6:45. Let me know!",
+      "difficulty": "medium",
+      "explanation": "A suitable message includes all three points: film, time, and meeting place."
+    },
+    {
+      "id": "writing_p1_q2",
+      "type": "fill_blank",
+      "question": "Write a message to your classmate about a study group. Include: when, where, what to study.",
+      "options": [],
+      "answer": "Hi! Shall we start a study group? We could meet at the library tomorrow at 4pm to practice English together. Let me know if that works for you!",
+      "difficulty": "medium",
+      "explanation": "A good response covers all three elements: time, location, and subject."
+    },
+    {
+      "id": "writing_p1_q3",
+      "type": "fill_blank",
+      "question": "Write a message to your parent about staying at a friend's house. Include: which friend, when, what time you'll be back.",
+      "options": [],
+      "answer": "Mum, can I stay at Tom's house after school today? We'll study together and I'll be back by 8pm. Is that okay? Thanks!",
+      "difficulty": "easy",
+      "explanation": "The message clearly states which friend, the duration, and return time."
+    }
+  ]
+}

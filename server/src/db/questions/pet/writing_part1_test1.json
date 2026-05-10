@@ -1,0 +1,28 @@
+{
+  "exam": "PET Writing Part 1",
+  "exam_type": "PET",
+  "level": "B1",
+  "skill": "Writing",
+  "part": 1,
+  "instruction": "Write an email of 100 words or more.",
+  "questions": [
+    {
+      "id": "pet_writing_p1_q1",
+      "type": "fill_blank",
+      "question": "You have received an email from an English-speaking friend who is planning to visit your city. Write an email to your friend. Include: suggest dates, recommend places to visit, offer to be a guide.",
+      "options": [],
+      "answer": "Dear Sarah, Thank you for your email! I'm so happy you're planning to visit. How about coming in July? The weather is nice then. I recommend visiting the History Museum and the old town. The food market is also great! I can show you around if you're free. Let me know the dates and I'll plan everything. Best wishes, [Your name]",
+      "difficulty": "medium",
+      "explanation": "A good response covers all three points with appropriate length and detail."
+    },
+    {
+      "id": "pet_writing_p1_q2",
+      "type": "fill_blank",
+      "question": "Your English teacher has asked you to write about a holiday you enjoyed. Write about where you went, what you did, and why it was special. Write 100 words or more.",
+      "options": [],
+      "answer": "Last summer, I went to Barcelona with my family. It was amazing! We visited the famous Sagrada Familia church and walked along the beach. The food was delicious, especially the fresh seafood. My favourite part was watching the sunset from Montjuïc hill. Everyone was so friendly and the weather was perfect. I would love to go back someday because there's still so much to see. It was truly an unforgettable experience!",
+      "difficulty": "hard",
+      "explanation": "A well-developed response with past tense, descriptive language, and personal opinions."
+    }
+  ]
+}

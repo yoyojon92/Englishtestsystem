@@ -1,0 +1,55 @@
+{
+  "exam": "PET Listening Part 1",
+  "exam_type": "PET",
+  "level": "B1",
+  "skill": "Listening",
+  "part": 1,
+  "instruction": "Listen to five short extracts. Choose the correct answer A, B or C.",
+  "questions": [
+    {
+      "id": "pet_listening_p1_q1",
+      "type": "multiple_choice",
+      "question": "What does the speaker advise the listener to do?",
+      "options": ["Arrive earlier next time", "Bring warmer clothes", "Check the weather forecast"],
+      "answer": "C",
+      "difficulty": "medium",
+      "explanation": "The speaker suggests checking the weather before the next trip."
+    },
+    {
+      "id": "pet_listening_p1_q2",
+      "type": "multiple_choice",
+      "question": "Where is the meeting going to be held?",
+      "options": ["In the conference room", "In the main hall", "In the café downstairs"],
+      "answer": "B",
+      "difficulty": "medium",
+      "explanation": "The speaker confirms the main hall has been booked for the meeting."
+    },
+    {
+      "id": "pet_listening_p1_q3",
+      "type": "multiple_choice",
+      "question": "How much time do they have to finish the project?",
+      "options": ["Two weeks", "Three weeks", "One month"],
+      "answer": "A",
+      "difficulty": "medium",
+      "explanation": "The deadline is set for two weeks from today."
+    },
+    {
+      "id": "pet_listening_p1_q4",
+      "type": "multiple_choice",
+      "question": "What is the relationship between the speakers?",
+      "options": ["Colleagues", "Doctor and patient", "Teacher and student"],
+      "answer": "A",
+      "difficulty": "hard",
+      "explanation": "They discuss work schedules and meetings, indicating they work together."
+    },
+    {
+      "id": "pet_listening_p1_q5",
+      "type": "multiple_choice",
+      "question": "What will the weather be like tomorrow?",
+      "options": ["Sunny but cold", "Rainy all day", "Cloudy with sunny periods"],
+      "answer": "C",
+      "difficulty": "hard",
+      "explanation": "The forecast predicts clouds in the morning but sunny conditions later."
+    }
+  ]
+}
