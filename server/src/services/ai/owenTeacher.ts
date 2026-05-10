@@ -10,9 +10,9 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-// 通义千问 API 配置
+// 阿里云百炼 API 配置（兼容 OpenAI 接口协议）
 const DASHSCOPE_CONFIG = {
-  API_BASE_URL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+  API_BASE_URL: process.env.DASHSCOPE_API_BASE || 'https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1',
   API_KEY: process.env.DASHSCOPE_API_KEY || '',
   MODEL: process.env.DASHSCOPE_MODEL || 'qwen-plus',
 };
