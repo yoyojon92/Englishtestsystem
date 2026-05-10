@@ -457,7 +457,7 @@ router.post('/messages', async (req: any, res: any) => {
       await wecomClient.sendTextMessage(parentUserId, `[教师消息] ${content}`);
     }
   } catch (error) {
-    console.log('Failed to send wecom message:', error);
+    console.error('Failed to send wecom message:', error);
   }
   
   res.json({
@@ -519,7 +519,7 @@ router.post('/messages/batch', async (req: any, res: any) => {
         await wecomClient.sendTextMessage(student.parentUserId, `[班级通知] ${content}`);
       }
     } catch (error) {
-      console.log('Failed to send wecom message to:', student.parentUserId);
+      console.error('Failed to send wecom message to:', student.parentUserId);
     }
   }
   
@@ -650,7 +650,7 @@ ${scores ? `
       wecomResult = await wecomClient.sendMarkdownMessage(student.parentUserId, markdown);
     }
   } catch (error) {
-    console.log('Failed to send wecom report:', error);
+    console.error('Failed to send wecom report:', error);
   }
   
   res.json({

@@ -6,10 +6,16 @@
 import * as crypto from 'crypto';
 
 // 签名密钥 (生产环境应从环境变量读取)
-const SIGN_SECRET = process.env.SHARE_LINK_SECRET || 'nutshell_english_secret_key';
+const SIGN_SECRET = process.env.SHARE_LINK_SECRET;
+if (!SIGN_SECRET) {
+  console.warn('[ShareLink] SHARE_LINK_SECRET not set, using fallback');
+}
 
 // 分享链接域名
 export const SHARE_DOMAIN = process.env.SHARE_DOMAIN || 'https://example.com';
+if (SHARE_DOMAIN === 'https://example.com' && process.env.NODE_ENV === 'production') {
+  throw new Error('[ShareLink] SHARE_DOMAIN must be set in production');
+}
 
 // 分享链接参数接口
 export interface ShareParams{
@@ -158,7 +164,7 @@ export function recordLinkClick(params: ShareParams): void {
   stats.clicks++;
   channelStats.set(key, stats);
   
-  console.log('[ShareLink] Click recorded:', { key, clicks: stats.clicks });
+  console.warn('[ShareLink] Click recorded:', { key, clicks: stats.clicks });
 }
 
 /**

@@ -41,7 +41,7 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`✅ Loaded ${ketCount + petCount} questions (KET: ${ketCount}, PET: ${petCount})`);
     console.log(`   questions Map size: ${questions.size}`);
   } catch (err) {
-    console.log('⚠️ Could not load questions:', (err as Error).message);
+    console.warn('⚠️ Could not load questions:', (err as Error).message);
   }
 }
 

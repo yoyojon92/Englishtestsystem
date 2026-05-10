@@ -234,12 +234,14 @@ router.get('/session/:sessionId', (req, res) => {
 /**
  * 渠道统计
  * GET /api/v1/test/stats
+ * TODO: 连接真实数据库后替换为真实统计数据
  */
 router.get('/stats', (req, res) => {
   try {
     // 简单的渠道统计（实际应该存数据库）
     res.json({
       success: true,
+      _mock: true, // 标记：生产环境必须替换
       data: {
         message: 'Channel stats endpoint - implement with database',
         channels: [

@@ -188,7 +188,7 @@ class NotificationService {
         TemplateParam: params,
       };
 
-      console.log(`SMS would be sent:`, message);
+      console.warn(`[Notification] SMS would be sent (not implemented):`, message);
       // 实际调用阿里云API
       return true;
     } catch (error) {
@@ -217,7 +217,7 @@ class NotificationService {
       };
 
       // 实际使用时需要使用极光 SDK
-      console.log(`App push would be sent:`, message);
+      console.warn(`[Notification] App push would be sent (not implemented):`, message);
       return true;
     } catch (error) {
       console.error('Failed to send app push:', error);
@@ -241,7 +241,7 @@ class NotificationService {
 
     try {
       // 实际使用时需要使用 nodemailer
-      console.log(`Email would be sent to ${to}:`, subject);
+      console.warn(`[Notification] Email would be sent (not implemented) to ${to}:`, subject);
       return true;
     } catch (error) {
       console.error('Failed to send email:', error);

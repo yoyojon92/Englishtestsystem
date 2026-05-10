@@ -8,7 +8,7 @@ const router = Router();
 
 // Debug: log questions size on each request
 router.use((req, res, next) => {
-  console.log(`[DEBUG] questions router: ${req.method} ${req.url}`);
+  console.debug(`[DEBUG] questions router: ${req.method} ${req.url}`);
   next();
 });
 
