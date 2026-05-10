@@ -54,42 +54,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="courses"
-        options={{
-          title: '课程',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="book-open" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="progress"
-        options={{
-          title: '进度',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="-chart-line" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="reports"
-        options={{
-          title: '报告',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="file-alt" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="exams"
-        options={{
-          title: '考试',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="trophy" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="profile"
         options={{
           title: '我的',

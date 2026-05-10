@@ -1,1 +1,1 @@
-export { default } from "@/screens/share";
+export { default } from '@/screens/share';

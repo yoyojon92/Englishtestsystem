@@ -81,14 +81,16 @@ app.get('/api/v1/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Debug endpoint
-app.get('/api/v1/debug/questions', (req, res) => {
-  res.json({ 
-    questionsSize: questions.size,
-    questionIds: Array.from(questions.keys()).slice(0, 5),
-    sample: Array.from(questions.values())[0]
+// Debug endpoint (only in development)
+if (process.env.NODE_ENV !== 'production') {
+  app.get('/api/v1/debug/questions', (req, res) => {
+    res.json({ 
+      questionsSize: questions.size,
+      questionIds: Array.from(questions.keys()).slice(0, 5),
+      sample: Array.from(questions.values())[0]
+    });
   });
-});
+}
 
 // Share API 路由 (分享链接与渠道追踪)
 import shareRouter from './routes/share';

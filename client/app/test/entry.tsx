@@ -1,1 +1,1 @@
-export { default as entry } from "@/screens/test/entry";
+export { default } from '@/screens/test/entry';

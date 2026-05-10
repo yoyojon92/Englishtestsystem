@@ -1,1 +1,1 @@
-export { default as playing } from "@/screens/test/playing";
+export { default } from '@/screens/test/playing';

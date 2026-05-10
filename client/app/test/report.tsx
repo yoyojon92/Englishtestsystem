@@ -1,1 +1,1 @@
-export { default as report } from "@/screens/test/report";
+export { default } from '@/screens/test/report';
