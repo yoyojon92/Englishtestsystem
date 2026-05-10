@@ -1,12 +1,39 @@
+# Dependencies
 node_modules/
-dist/
-build/
+.pnpm-store/
+
+# Expo
 .expo/
-.expo-shared/
-.eslintcache
-expo/expo-env.d.ts
-expo-env.d.ts
+dist/
+web-build/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Logs
 logs/
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+*.tgz
+*.zip
+
+# TypeScript
 *.tsbuildinfo
-node-compile-cache/
