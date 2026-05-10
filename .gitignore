@@ -37,3 +37,7 @@ logs/
 
 # TypeScript
 *.tsbuildinfo
+
+# Package files
+*.tar.gz
+*.zip
